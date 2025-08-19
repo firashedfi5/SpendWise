@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/constants.dart';
 
 LinearGradient cardGradient() {
   return const LinearGradient(
-    colors: [Colors.blueAccent, Colors.purpleAccent, Colors.orangeAccent],
+    colors: [
+      kPrimaryGradientColor,
+      kSecondaryGradientColor,
+      kTeriaryGradientColor,
+    ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );

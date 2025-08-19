@@ -12,7 +12,10 @@ class TransactionsHeader extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Transactions', style: Styles.textStyle20),
+            Text(
+              'Transactions',
+              style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w600),
+            ),
             TextButton(onPressed: () {}, child: const Text('View All')),
           ],
         ),
