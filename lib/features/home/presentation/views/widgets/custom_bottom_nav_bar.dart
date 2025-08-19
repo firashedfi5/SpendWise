@@ -28,25 +28,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       body: _pages[_selectIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kPrimaryColor,
         onPressed: () {},
         shape: const CircleBorder(),
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                kTeriaryGradientColor,
-                kSecondaryGradientColor,
-                kPrimaryGradientColor,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: const Icon(Icons.add, color: Colors.white, size: 30),
-        ),
+        child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
@@ -54,7 +39,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           currentIndex: _selectIndex,
           onTap: _navigateBottomBar,
           // type: BottomNavigationBarType.fixed,
-          selectedItemColor: kPrimaryGradientColor,
+          selectedItemColor: kPrimaryColor,
           unselectedItemColor: Colors.grey,
           elevation: 3,
           showSelectedLabels: false,

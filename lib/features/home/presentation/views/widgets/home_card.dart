@@ -14,12 +14,12 @@ class HomeCard extends StatelessWidget {
         child: Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(kBorderRadius24),
           ),
           child: Container(
             height: MediaQuery.of(context).size.height * 0.25,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(kBorderRadius24),
               gradient: cardGradient(),
             ),
             child: Padding(

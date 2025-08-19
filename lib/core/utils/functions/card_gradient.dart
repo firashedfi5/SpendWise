@@ -8,7 +8,7 @@ LinearGradient cardGradient() {
       kSecondaryGradientColor,
       kTeriaryGradientColor,
     ],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    begin: Alignment.bottomLeft,
+    end: Alignment.topRight,
   );
 }
