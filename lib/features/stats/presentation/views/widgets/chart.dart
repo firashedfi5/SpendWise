@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/constants.dart';
 
 class Chart extends StatelessWidget {
   const Chart({super.key});
@@ -42,7 +43,7 @@ class Chart extends StatelessWidget {
                 barRods: [
                   BarChartRodData(
                     toY: 5000,
-                    color: Colors.purple,
+                    color: kPrimaryColor,
                     width: 10,
                     backDrawRodData: BackgroundBarChartRodData(
                       color: Colors.grey.withValues(alpha: 0.4),
@@ -52,7 +53,7 @@ class Chart extends StatelessWidget {
                   ),
                   BarChartRodData(
                     toY: 3500,
-                    color: Colors.orange,
+                    color: kSecondaryColor,
                     width: 10,
                     backDrawRodData: BackgroundBarChartRodData(
                       color: Colors.grey.withValues(alpha: 0.4),
