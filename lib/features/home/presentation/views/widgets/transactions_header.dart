@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class TransactionsHeader extends StatelessWidget {
@@ -7,7 +8,7 @@ class TransactionsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: kPadding24),
       sliver: SliverToBoxAdapter(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

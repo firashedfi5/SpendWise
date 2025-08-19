@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/functions/card_gradient.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
@@ -22,7 +23,7 @@ class HomeCard extends StatelessWidget {
               gradient: cardGradient(),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(kPadding24),
               child: Column(
                 children: [
                   Text(
