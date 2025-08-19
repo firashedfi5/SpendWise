@@ -9,7 +9,7 @@ class StatsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: kPadding24, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: kPadding24, vertical: 20),
       sliver: SliverToBoxAdapter(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.4,

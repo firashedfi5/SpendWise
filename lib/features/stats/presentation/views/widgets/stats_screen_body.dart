@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spendwise/core/constants.dart';
-import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
+import 'package:spendwise/features/stats/presentation/views/widgets/custom_toggle_buttons.dart';
+import 'package:spendwise/features/stats/presentation/views/widgets/income_outcome_header.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/stats_container.dart';
 
 class StatsScreenBody extends StatelessWidget {
@@ -8,55 +9,13 @@ class StatsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
-        const SliverAppBar(title: Text('Overview')),
-        // SliverToBoxAdapter(child: SizedBox(height: 100)),
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: kPadding24),
-          sliver: SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                2,
-                (index) => Container(
-                  width: MediaQuery.of(context).size.width * .4,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: const Color(0xfff3ebfe),
-                    borderRadius: BorderRadius.circular(kBorderRadius24),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      children: [
-                        const Text('Total Income', style: Styles.textStyle16),
-                        const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          spacing: 5,
-                          children: [
-                            const Icon(
-                              Icons.arrow_circle_down,
-                              color: Colors.purple,
-                            ),
-                            Text(
-                              '\$8,500',
-                              style: Styles.textStyle16.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const StatsContainer(),
+        SliverAppBar(title: Text('Overview'), centerTitle: true),
+        IncomeOutcomeHeader(),
+        StatsContainer(),
+        CustomToggleButtons(),
+        TransactionsListView(),
       ],
     );
   }
