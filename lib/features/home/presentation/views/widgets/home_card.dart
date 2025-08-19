@@ -8,7 +8,7 @@ class HomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
       sliver: SliverToBoxAdapter(
         child: Card(
           elevation: 5,
