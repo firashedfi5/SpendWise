@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/features/home/presentation/views/home_screen.dart';
 import 'package:spendwise/features/stats/presentation/views/stats_screen.dart';
 
@@ -29,7 +31,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () {},
+        onPressed: () =>
+            GoRouter.of(context).push(AppRouter.kNewTransactionScreen),
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
