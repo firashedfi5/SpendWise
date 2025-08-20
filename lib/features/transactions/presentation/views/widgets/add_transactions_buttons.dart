@@ -32,7 +32,7 @@ class AddTransactionButtons extends StatelessWidget {
                     children: [
                       ImageIcon(
                         AssetImage(AssetsData.incomeIcon),
-                        color: Colors.green,
+                        color: kPrimaryColor,
                         size: 30,
                       ),
                       Spacer(),
@@ -58,7 +58,7 @@ class AddTransactionButtons extends StatelessWidget {
                     children: [
                       ImageIcon(
                         AssetImage(AssetsData.expenseIcon),
-                        color: Colors.red,
+                        color: kSecondaryColor,
                         size: 29,
                       ),
                       Spacer(),
