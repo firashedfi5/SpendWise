@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/core/utils/service_locatore.dart';
 
 void main() {
+  setup();
   runApp(const SpendWise());
 }
 
