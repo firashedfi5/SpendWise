@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spendwise/core/enums/income_categories.dart';
+import 'package:spendwise/core/enums/expense_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -52,7 +52,8 @@ class SelectCategory extends StatelessWidget {
                                     mainAxisSpacing: 10,
                                   ),
                               itemBuilder: (context, index) {
-                                final category = IncomeCategories.values[index];
+                                final category =
+                                    ExpenseCategories.values[index];
 
                                 return Column(
                                   children: [
@@ -68,7 +69,10 @@ class SelectCategory extends StatelessWidget {
                                         child: Center(child: category.icon),
                                       ),
                                     ),
-                                    Text(category.name),
+                                    Text(
+                                      category.name,
+                                      style: Styles.textStyle12,
+                                    ),
                                   ],
                                 );
                               },
