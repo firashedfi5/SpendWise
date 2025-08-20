@@ -32,7 +32,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
         onPressed: () =>
-            GoRouter.of(context).push(AppRouter.kNewTransactionScreen),
+            GoRouter.of(context).push(AppRouter.kAddTransactionScreen),
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/assets.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
@@ -15,7 +17,8 @@ class AddTransactionButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () =>
+                  GoRouter.of(context).push(AppRouter.kAddIncomeScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
                 height: 80,
@@ -40,7 +43,8 @@ class AddTransactionButtons extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () =>
+                  GoRouter.of(context).push(AppRouter.kAddExpenseScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
                 height: 80,

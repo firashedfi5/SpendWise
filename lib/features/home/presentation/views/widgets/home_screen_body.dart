@@ -14,7 +14,7 @@ class HomeScreenBody extends StatelessWidget {
         CustomAppBar(),
         HomeCard(),
         TransactionsHeader(),
-        TransactionsListView(),
+        TransactionsListView(childCount: 4),
       ],
     );
   }
