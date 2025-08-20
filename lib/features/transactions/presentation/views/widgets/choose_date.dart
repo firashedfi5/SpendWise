@@ -3,7 +3,9 @@ import 'package:spendwise/core/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ChooseDate extends StatefulWidget {
-  const ChooseDate({super.key});
+  const ChooseDate({super.key, required this.calendarColor});
+
+  final Color calendarColor;
 
   @override
   State<ChooseDate> createState() => _ChooseDateState();
@@ -35,12 +37,12 @@ class _ChooseDateState extends State<ChooseDate> {
           availableCalendarFormats: const {CalendarFormat.week: 'Week'},
 
           calendarStyle: CalendarStyle(
-            selectedDecoration: const BoxDecoration(
-              color: kPrimaryColor,
+            selectedDecoration: BoxDecoration(
+              color: widget.calendarColor,
               shape: BoxShape.circle,
             ),
             todayDecoration: BoxDecoration(
-              color: kPrimaryColor.withValues(alpha: 0.25),
+              color: widget.calendarColor.withValues(alpha: 0.25),
               shape: BoxShape.circle,
             ),
             todayTextStyle: const TextStyle(fontWeight: FontWeight.bold),

@@ -25,15 +25,18 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ChooseDate(),
+              const ChooseDate(calendarColor: kPrimaryColor),
               const SizedBox(height: 30),
-              IncomTitleTextFormField(titleController: titleController),
+              IncomTitleTextFormField(
+                titleController: titleController,
+                label: 'Income Title',
+                hintText: 'Remote Job',
+              ),
               const SizedBox(height: 30),
               AmountTextFormField(amountController: amountController),
               const SizedBox(height: 30),
               const SelectCategory(),
               const SizedBox(height: 50),
-              // const Spacer(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(MediaQuery.of(context).size.width, 45),
