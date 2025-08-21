@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/enums/income_expenses_enum.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class IncomeOutcomeHeader extends StatelessWidget {
@@ -12,42 +13,40 @@ class IncomeOutcomeHeader extends StatelessWidget {
       sliver: SliverToBoxAdapter(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(
-            2,
-            (index) => Container(
-              width: MediaQuery.of(context).size.width * .4,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(kBorderRadius24),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    const Text('Total Income', style: Styles.textStyle16),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 5,
+          children: IncomeExpenseEnum.values
+              .map(
+                (e) => Container(
+                  width: MediaQuery.of(context).size.width * .4,
+                  height: 85,
+                  decoration: BoxDecoration(
+                    color: e.color.withValues(alpha: 0.13),
+                    borderRadius: BorderRadius.circular(kBorderRadius24),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
                       children: [
-                        const Icon(
-                          Icons.arrow_circle_down,
-                          color: Colors.purple,
-                        ),
-                        Text(
-                          '\$8,500',
-                          style: Styles.textStyle16.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Text(e.title, style: Styles.textStyle16),
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 5,
+                          children: [
+                            e.icon,
+                            Text(
+                              '\$${e.amount.toString()}00',
+                              style: Styles.textStyle16.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
+              )
+              .toList(),
         ),
       ),
     );

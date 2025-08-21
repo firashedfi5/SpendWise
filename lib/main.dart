@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/service_locatore.dart';
 
@@ -14,10 +13,7 @@ class SpendWise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData(
-        scaffoldBackgroundColor: kScaffoldBackgroundColor,
-        appBarTheme: const AppBarTheme(color: kScaffoldBackgroundColor),
-      ),
+      // theme: ThemeData.dark(),
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
     );

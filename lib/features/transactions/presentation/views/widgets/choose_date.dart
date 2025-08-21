@@ -20,7 +20,7 @@ class _ChooseDateState extends State<ChooseDate> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: widget.calendarColor.withValues(alpha: 0.13),
         borderRadius: BorderRadius.circular(kBorderRadius24),
       ),
       child: Padding(

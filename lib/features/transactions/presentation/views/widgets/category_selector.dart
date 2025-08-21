@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/enums/expense_categories.dart';
 import 'package:spendwise/core/enums/income_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
@@ -47,8 +48,10 @@ class CategorySelector extends StatelessWidget {
                         child: Container(
                           width: 55,
                           height: 55,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
+                          decoration: BoxDecoration(
+                            color: isIncome == true
+                                ? kPrimaryColor.withValues(alpha: 0.13)
+                                : kSecondaryColor.withValues(alpha: 0.13),
                             shape: BoxShape.circle,
                           ),
                           child: Center(

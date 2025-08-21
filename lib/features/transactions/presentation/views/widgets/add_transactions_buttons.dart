@@ -21,9 +21,9 @@ class AddTransactionButtons extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.kAddIncomeScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
-                height: 80,
+                height: 85,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: kPrimaryColor.withValues(alpha: 0.13),
                   borderRadius: BorderRadius.circular(kBorderRadius24),
                 ),
                 child: const Padding(
@@ -47,9 +47,9 @@ class AddTransactionButtons extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.kAddExpenseScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
-                height: 80,
+                height: 85,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: kSecondaryColor.withValues(alpha: 0.13),
                   borderRadius: BorderRadius.circular(kBorderRadius24),
                 ),
                 child: const Padding(

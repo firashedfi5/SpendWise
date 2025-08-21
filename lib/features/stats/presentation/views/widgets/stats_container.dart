@@ -11,12 +11,8 @@ class StatsContainer extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: kPadding24, vertical: 20),
       sliver: SliverToBoxAdapter(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.4,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(kBorderRadius24),
-          ),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
