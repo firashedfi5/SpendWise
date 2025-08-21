@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
+import 'package:spendwise/features/auth/presentation/views/signin_screen.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/main_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/account_info_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/language_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/settings_screen.dart';
@@ -9,6 +10,7 @@ import 'package:spendwise/features/transactions/presentation/views/add_income_sc
 import 'package:spendwise/features/transactions/presentation/views/add_transaction_screen.dart';
 
 abstract class AppRouter {
+  static const String kMainScreen = '/mainScreen';
   static const String kAddTransactionScreen = '/newTransactionScreen';
   static const String kAddIncomeScreen = '/addIncomeScreen';
   static const String kAddExpenseScreen = '/addExpenseScreen';
@@ -18,9 +20,10 @@ abstract class AppRouter {
   static const String kThemeScreen = '/themeScreen';
   static final router = GoRouter(
     routes: [
+      GoRoute(path: '/', builder: (context, state) => const SigninScreen()),
       GoRoute(
-        path: '/',
-        builder: (context, state) => const CustomBottomNavBar(),
+        path: kMainScreen,
+        builder: (context, state) => const MainScreen(),
       ),
       GoRoute(
         path: kAddTransactionScreen,

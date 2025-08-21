@@ -39,6 +39,9 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
               const SizedBox(height: 50),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                   fixedSize: Size(MediaQuery.of(context).size.width, 45),
                   backgroundColor: kSecondaryColor,
                   foregroundColor: Colors.white,

@@ -6,14 +6,14 @@ import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/features/home/presentation/views/home_screen.dart';
 import 'package:spendwise/features/stats/presentation/views/stats_screen.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
-  const CustomBottomNavBar({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+class _MainScreenState extends State<MainScreen> {
   int _selectIndex = 0;
 
   void _navigateBottomBar(int index) {
