@@ -3,7 +3,9 @@ import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/category_selector.dart';
 
 class SelectCategory extends StatelessWidget {
-  const SelectCategory({super.key});
+  const SelectCategory({super.key, required this.isIncome});
+
+  final bool isIncome;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SelectCategory extends StatelessWidget {
                 showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
-                  builder: (context) => const CategorySelector(),
+                  builder: (context) => CategorySelector(isIncome: isIncome),
                 );
               },
               icon: const Icon(Icons.add, size: 30),

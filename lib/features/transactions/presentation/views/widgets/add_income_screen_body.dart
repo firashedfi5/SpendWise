@@ -35,7 +35,7 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
               const SizedBox(height: 30),
               AmountTextFormField(amountController: amountController),
               const SizedBox(height: 30),
-              const SelectCategory(),
+              const SelectCategory(isIncome: true),
               const SizedBox(height: 50),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

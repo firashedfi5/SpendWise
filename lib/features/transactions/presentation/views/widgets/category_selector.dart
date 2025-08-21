@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/enums/expense_categories.dart';
+import 'package:spendwise/core/enums/income_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class CategorySelector extends StatelessWidget {
-  const CategorySelector({super.key});
+  const CategorySelector({super.key, required this.isIncome});
+
+  final bool isIncome;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,8 @@ class CategorySelector extends StatelessWidget {
                   mainAxisSpacing: 10,
                 ),
                 itemBuilder: (context, index) {
-                  final category = ExpenseCategories.values[index];
+                  final incomeCategory = IncomeCategories.values[index];
+                  final expenseCategory = ExpenseCategories.values[index];
 
                   return Column(
                     children: [
@@ -47,10 +51,19 @@ class CategorySelector extends StatelessWidget {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child: Center(child: category.icon),
+                          child: Center(
+                            child: isIncome == true
+                                ? incomeCategory.icon
+                                : expenseCategory.icon,
+                          ),
                         ),
                       ),
-                      Text(category.name, style: Styles.textStyle12),
+                      Text(
+                        isIncome == true
+                            ? incomeCategory.name
+                            : expenseCategory.name,
+                        style: Styles.textStyle12,
+                      ),
                     ],
                   );
                 },

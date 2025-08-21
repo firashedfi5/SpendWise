@@ -35,7 +35,7 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
               const SizedBox(height: 30),
               AmountTextFormField(amountController: amountController),
               const SizedBox(height: 30),
-              const SelectCategory(),
+              const SelectCategory(isIncome: false),
               const SizedBox(height: 50),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
