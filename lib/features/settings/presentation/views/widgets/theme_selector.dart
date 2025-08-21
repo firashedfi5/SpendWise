@@ -3,23 +3,23 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
 
-class LanguageSelector extends StatefulWidget {
-  const LanguageSelector({super.key});
+class ThemeSelector extends StatefulWidget {
+  const ThemeSelector({super.key});
 
   @override
-  State<LanguageSelector> createState() => _LanguageSelectorState();
+  State<ThemeSelector> createState() => _ThemeSelectorState();
 }
 
-List<String> languages = ['English', 'French', 'Arabic'];
+List<String> themes = ['Light', 'Dark'];
 
-class _LanguageSelectorState extends State<LanguageSelector> {
-  String currentLanguage = languages[0];
+class _ThemeSelectorState extends State<ThemeSelector> {
+  String currentTheme = themes[0];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        languages.length,
+        themes.length,
         (index) => RadioListTile(
           activeColor: kPrimaryColor,
           shape: RoundedRectangleBorder(
@@ -30,14 +30,14 @@ class _LanguageSelectorState extends State<LanguageSelector> {
             horizontal: 8,
             vertical: 2,
           ),
-          title: Text(languages[index]),
-          value: languages[index],
-          groupValue: currentLanguage,
+          title: Text(themes[index]),
+          value: themes[index],
+          groupValue: currentTheme,
           onChanged: (value) {
             setState(() {
-              currentLanguage = value.toString();
+              currentTheme = value.toString();
             });
-            log(currentLanguage);
+            log(currentTheme);
           },
         ),
       ),

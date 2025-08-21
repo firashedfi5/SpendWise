@@ -23,7 +23,7 @@ class SettingsButtons extends StatelessWidget {
                     ),
                     child: Icon(e.icon, size: 20, color: Colors.white),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 10),
                   Text(e.title, style: Styles.textStyle18),
                   const Spacer(),
                   const Icon(Icons.arrow_forward_ios),
