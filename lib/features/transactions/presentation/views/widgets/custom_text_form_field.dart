@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
-class IncomTitleTextFormField extends StatelessWidget {
-  const IncomTitleTextFormField({
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({
     super.key,
-    required this.titleController,
+    required this.textController,
     required this.label,
     required this.hintText,
   });
 
-  final TextEditingController titleController;
+  final TextEditingController textController;
   final String label;
   final String hintText;
 
@@ -21,7 +21,7 @@ class IncomTitleTextFormField extends StatelessWidget {
         Text(label, style: Styles.textStyle18),
         const SizedBox(height: 8),
         TextFormField(
-          controller: titleController,
+          controller: textController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter a value!';

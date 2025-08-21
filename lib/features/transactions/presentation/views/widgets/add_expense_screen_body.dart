@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/amount_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/choose_date.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/income_title_text_form_field.dart';
+import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/select_category.dart';
 
 class AddExpenseScreenBody extends StatefulWidget {
@@ -27,8 +27,8 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
             children: [
               const ChooseDate(calendarColor: kSecondaryColor),
               const SizedBox(height: 30),
-              IncomTitleTextFormField(
-                titleController: titleController,
+              CustomTextFormField(
+                textController: titleController,
                 label: 'Expense Title',
                 hintText: 'Travel trip to canada',
               ),
