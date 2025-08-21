@@ -17,7 +17,7 @@ class HomeCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(kBorderRadius24),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.255,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(kBorderRadius24),
               gradient: cardGradient(),

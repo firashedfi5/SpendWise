@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/amount_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/choose_date.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
@@ -37,17 +38,11 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
               const SizedBox(height: 30),
               const SelectCategory(isIncome: true),
               const SizedBox(height: 50),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  fixedSize: Size(MediaQuery.of(context).size.width, 45),
-                  backgroundColor: kPrimaryColor,
-                  foregroundColor: Colors.white,
-                ),
+              CustomElevatedButton(
+                backgroundColor: kPrimaryColor,
+                foregroundColor: Colors.white,
+                label: 'Add Income',
                 onPressed: () {},
-                child: const Text('Add Income'),
               ),
             ],
           ),

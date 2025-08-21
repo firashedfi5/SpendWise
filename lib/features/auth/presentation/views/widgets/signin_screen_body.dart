@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/assets.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/auth/presentation/views/widgets/signin_main_section.dart';
+import 'package:spendwise/features/auth/presentation/views/widgets/signin_with_google.dart';
 
 class SigninScreenBody extends StatefulWidget {
   const SigninScreenBody({super.key});
@@ -48,39 +48,7 @@ class _SigninScreenBodyState extends State<SigninScreenBody> {
                 ],
               ),
               const SizedBox(height: 4),
-              const Row(
-                children: [
-                  Expanded(
-                    child: Divider(color: kPrimaryColor, thickness: 1.5),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text('OR'),
-                  ),
-                  Expanded(
-                    child: Divider(color: kPrimaryColor, thickness: 1.5),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(width: 1.5, color: kPrimaryColor),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  fixedSize: Size(MediaQuery.of(context).size.width, 45),
-                ),
-                onPressed: () {},
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FaIcon(FontAwesomeIcons.google),
-                    SizedBox(width: 10),
-                    Text('Sign in with Google'),
-                  ],
-                ),
-              ),
+              const SigninWithGoogle(),
             ],
           ),
         ),
