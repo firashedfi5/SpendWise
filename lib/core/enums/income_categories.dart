@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spendwise/core/utils/assets.dart';
 
 enum IncomeCategories {
@@ -50,27 +49,45 @@ extension IncomeCategoriesExtension on IncomeCategories {
   Widget get icon {
     switch (this) {
       case IncomeCategories.salary:
-        return const ImageIcon(AssetImage(AssetsData.salaryIcon), size: 30);
+        return const Image(image: AssetImage(AssetsData.salaryIcon), width: 35);
       case IncomeCategories.freelance:
-        return const ImageIcon(AssetImage(AssetsData.freelanceIcon), size: 30);
+        return const Image(
+          image: AssetImage(AssetsData.freelanceIcon),
+          width: 35,
+        );
       case IncomeCategories.business:
-        return const ImageIcon(AssetImage(AssetsData.businessIcon), size: 30);
+        return const Image(
+          image: AssetImage(AssetsData.businessIcon),
+          width: 35,
+        );
       case IncomeCategories.partTime:
-        return const ImageIcon(AssetImage(AssetsData.partTimeIcon), size: 36);
+        return const Image(
+          image: AssetImage(AssetsData.partTimeIcon),
+          width: 35,
+        );
       case IncomeCategories.investment:
-        return const ImageIcon(AssetImage(AssetsData.investmentIcon), size: 34);
+        return const Image(
+          image: AssetImage(AssetsData.investmentIcon),
+          width: 35,
+        );
       case IncomeCategories.rental:
-        return const ImageIcon(AssetImage(AssetsData.rentIcon), size: 30);
+        return const Image(image: AssetImage(AssetsData.rentIcon), width: 35);
       case IncomeCategories.bonus:
-        return const ImageIcon(AssetImage(AssetsData.bonusIcon), size: 34);
+        return const Image(image: AssetImage(AssetsData.bonusIcon), width: 35);
       case IncomeCategories.gift:
-        return const FaIcon(FontAwesomeIcons.gift, size: 24);
+        return const Image(image: AssetImage(AssetsData.giftIcon), width: 35);
       case IncomeCategories.refund:
-        return const ImageIcon(AssetImage(AssetsData.refundIcon), size: 30);
+        return const Image(image: AssetImage(AssetsData.refundIcon), width: 35);
       case IncomeCategories.cashback:
-        return const ImageIcon(AssetImage(AssetsData.cashbackIcon), size: 34);
+        return const Image(
+          image: AssetImage(AssetsData.cashbackIcon),
+          width: 35,
+        );
       case IncomeCategories.pension:
-        return const ImageIcon(AssetImage(AssetsData.pensionIcon), size: 34);
+        return const Image(
+          image: AssetImage(AssetsData.pensionIcon),
+          width: 35,
+        );
       case IncomeCategories.other:
         return const Icon(Icons.more_horiz);
     }

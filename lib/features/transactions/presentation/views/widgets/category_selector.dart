@@ -50,8 +50,8 @@ class CategorySelector extends StatelessWidget {
                           height: 55,
                           decoration: BoxDecoration(
                             color: isIncome == true
-                                ? kPrimaryColor.withValues(alpha: 0.13)
-                                : kSecondaryColor.withValues(alpha: 0.13),
+                                ? kPrimaryColor.withValues(alpha: 0.1)
+                                : kSecondaryColor.withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: Center(

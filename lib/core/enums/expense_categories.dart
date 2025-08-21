@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spendwise/core/utils/assets.dart';
 
 enum ExpenseCategories {
@@ -50,35 +49,47 @@ extension IncomeCategoriesExtension on ExpenseCategories {
   Widget get icon {
     switch (this) {
       case ExpenseCategories.food:
-        return const Icon(Icons.fastfood, size: 28);
+        return const Image(image: AssetImage(AssetsData.foodIcon), width: 35);
       case ExpenseCategories.transport:
-        return const FaIcon(FontAwesomeIcons.bus);
+        return const Image(
+          image: AssetImage(AssetsData.transportIcon),
+          width: 35,
+        );
       case ExpenseCategories.shopping:
-        return const FaIcon(FontAwesomeIcons.bagShopping, size: 26);
+        return const Image(
+          image: AssetImage(AssetsData.shoppingIcon),
+          width: 35,
+        );
       case ExpenseCategories.bills:
-        return const ImageIcon(AssetImage(AssetsData.billsIcon), size: 34);
+        return const Image(image: AssetImage(AssetsData.billsIcon), width: 35);
       case ExpenseCategories.entertainment:
-        return const ImageIcon(
-          AssetImage(AssetsData.entertainmentIcon),
-          size: 34,
+        return const Image(
+          image: AssetImage(AssetsData.entertainmentIcon),
+          width: 35,
         );
       case ExpenseCategories.health:
-        return const ImageIcon(AssetImage(AssetsData.healthIcon), size: 30);
+        return const Image(image: AssetImage(AssetsData.healthIcon), width: 35);
       case ExpenseCategories.education:
-        return const ImageIcon(AssetImage(AssetsData.educationIcon), size: 34);
+        return const Image(
+          image: AssetImage(AssetsData.educationIcon),
+          width: 35,
+        );
       case ExpenseCategories.travel:
-        return const ImageIcon(AssetImage(AssetsData.travelIcon), size: 34);
+        return const Image(image: AssetImage(AssetsData.travelIcon), width: 35);
       case ExpenseCategories.groceries:
-        return const ImageIcon(AssetImage(AssetsData.groceriesIcon), size: 30);
+        return const Image(
+          image: AssetImage(AssetsData.groceriesIcon),
+          width: 35,
+        );
       case ExpenseCategories.subscription:
-        return const ImageIcon(
-          AssetImage(AssetsData.subscriptionIcon),
-          size: 34,
+        return const Image(
+          image: AssetImage(AssetsData.subscriptionIcon),
+          width: 35,
         );
       case ExpenseCategories.maintenance:
-        return const ImageIcon(
-          AssetImage(AssetsData.maintenanceIcon),
-          size: 30,
+        return const Image(
+          image: AssetImage(AssetsData.maintenanceIcon),
+          width: 35,
         );
       case ExpenseCategories.other:
         return const Icon(Icons.more_horiz);

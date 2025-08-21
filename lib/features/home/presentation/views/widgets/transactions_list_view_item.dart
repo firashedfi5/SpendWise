@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/core/enums/income_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class TransactionsListViewItem extends StatelessWidget {
@@ -10,21 +11,21 @@ class TransactionsListViewItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          const Icon(Icons.local_grocery_store_outlined),
+          Center(child: IncomeCategories.salary.icon),
           const SizedBox(width: 20),
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Grocery Store', style: Styles.textStyle18),
+              Text('Salary', style: Styles.textStyle18),
               SizedBox(height: 4),
               Text('Today', style: TextStyle(color: Colors.blueGrey)),
             ],
           ),
           const Spacer(),
           Text(
-            '-\$100.00',
+            '+\$1000.00',
             style: Styles.textStyle14.copyWith(
-              color: Colors.red,
+              color: Colors.green,
               fontWeight: FontWeight.bold,
             ),
           ),
