@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/assets.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
@@ -24,7 +26,12 @@ class CustomAppBar extends StatelessWidget {
           ),
         ],
       ),
-      actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.settings))],
+      actions: [
+        IconButton(
+          onPressed: () => GoRouter.of(context).push(AppRouter.kSettingsScreen),
+          icon: const Icon(Icons.settings),
+        ),
+      ],
     );
   }
 }
