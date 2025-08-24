@@ -11,7 +11,11 @@ class StatsScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScrollView(
       slivers: [
-        SliverAppBar(title: Text('Overview'), centerTitle: true),
+        SliverAppBar(
+          title: Text('Overview'),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+        ),
         IncomeOutcomeHeader(),
         StatsContainer(),
         CustomSegmentedButton(),
