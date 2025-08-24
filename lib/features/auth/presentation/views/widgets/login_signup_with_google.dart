@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spendwise/core/constants.dart';
 
-class SigninWithGoogle extends StatelessWidget {
-  const SigninWithGoogle({super.key});
+class LoginSignupWithGoogle extends StatelessWidget {
+  const LoginSignupWithGoogle({super.key, required this.isLogin});
+
+  final bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,14 @@ class SigninWithGoogle extends StatelessWidget {
             fixedSize: Size(MediaQuery.of(context).size.width, 45),
           ),
           onPressed: () {},
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FaIcon(FontAwesomeIcons.google),
-              SizedBox(width: 10),
-              Text('Sign in with Google'),
+              const FaIcon(FontAwesomeIcons.google),
+              const SizedBox(width: 10),
+              Text(
+                isLogin == true ? 'Log in with Google' : 'Sign up with Google',
+              ),
             ],
           ),
         ),
