@@ -28,7 +28,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
             const Text('Log in', style: Styles.textStyle28),
             const SizedBox(height: 8),
             const Text(
-              'Welcome back! Please enter your details.',
+              'Welcome back! Enter your login details below.',
               style: Styles.textStyle16,
             ),
 

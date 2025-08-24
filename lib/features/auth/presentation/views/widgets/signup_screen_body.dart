@@ -28,7 +28,7 @@ class _SignupScreenBodyState extends State<SignupScreenBody> {
             const Text('Create an account', style: Styles.textStyle28),
             const SizedBox(height: 8),
             const Text(
-              'Welcome! Please enter your details.',
+              'Welcome! Let’s set up your new account.',
               style: Styles.textStyle16,
             ),
 
