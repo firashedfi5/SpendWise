@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/features/auth/presentation/views/signin_screen.dart';
+import 'package:spendwise/features/auth/presentation/views/signup_screen.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/main_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/account_info_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/language_screen.dart';
@@ -10,6 +11,7 @@ import 'package:spendwise/features/transactions/presentation/views/add_income_sc
 import 'package:spendwise/features/transactions/presentation/views/add_transaction_screen.dart';
 
 abstract class AppRouter {
+  static const String kSignupScreen = '/signupScreen';
   static const String kMainScreen = '/mainScreen';
   static const String kAddTransactionScreen = '/newTransactionScreen';
   static const String kAddIncomeScreen = '/addIncomeScreen';
@@ -21,6 +23,10 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SigninScreen()),
+      GoRoute(
+        path: kSignupScreen,
+        builder: (context, state) => const SignupScreen(),
+      ),
       GoRoute(
         path: kMainScreen,
         builder: (context, state) => const MainScreen(),
