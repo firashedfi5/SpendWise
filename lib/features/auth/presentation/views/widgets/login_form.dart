@@ -38,7 +38,8 @@ class LoginForm extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
               style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-              onPressed: () {},
+              onPressed: () =>
+                  GoRouter.of(context).push(AppRouter.kForgotPasswordScreen),
               child: const Text('Forgot Password'),
             ),
           ),

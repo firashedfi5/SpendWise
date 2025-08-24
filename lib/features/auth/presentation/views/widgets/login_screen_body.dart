@@ -25,10 +25,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Log in',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
-            ),
+            const Text('Log in', style: Styles.textStyle28),
             const SizedBox(height: 8),
             const Text(
               'Welcome back! Please enter your details.',

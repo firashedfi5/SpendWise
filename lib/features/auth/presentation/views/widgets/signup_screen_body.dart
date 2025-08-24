@@ -25,17 +25,14 @@ class _SignupScreenBodyState extends State<SignupScreenBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Create an account',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
-            ),
+            const Text('Create an account', style: Styles.textStyle28),
             const SizedBox(height: 8),
             const Text(
               'Welcome! Please enter your details.',
               style: Styles.textStyle16,
             ),
-            const SizedBox(height: 20),
 
+            const SizedBox(height: 20),
             SignupForm(
               nameController: nameController,
               emailController: emailController,
@@ -58,6 +55,7 @@ class _SignupScreenBodyState extends State<SignupScreenBody> {
                 ),
               ],
             ),
+
             const SizedBox(height: 4),
             const LoginSignupWithGoogle(isLogin: false),
           ],

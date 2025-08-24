@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:spendwise/features/auth/presentation/views/forgot_passwrod_screen.dart';
 import 'package:spendwise/features/auth/presentation/views/login_screen.dart';
 import 'package:spendwise/features/auth/presentation/views/signup_screen.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/main_screen.dart';
@@ -12,6 +13,7 @@ import 'package:spendwise/features/transactions/presentation/views/add_transacti
 
 abstract class AppRouter {
   static const String kSignupScreen = '/signupScreen';
+  static const String kForgotPasswordScreen = '/forgotPasswordScreen';
   static const String kMainScreen = '/mainScreen';
   static const String kAddTransactionScreen = '/newTransactionScreen';
   static const String kAddIncomeScreen = '/addIncomeScreen';
@@ -26,6 +28,10 @@ abstract class AppRouter {
       GoRoute(
         path: kSignupScreen,
         builder: (context, state) => const SignupScreen(),
+      ),
+      GoRoute(
+        path: kForgotPasswordScreen,
+        builder: (context, state) => const ForgotPasswrodScreen(),
       ),
       GoRoute(
         path: kMainScreen,
