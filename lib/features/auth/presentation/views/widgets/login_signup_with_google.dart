@@ -19,7 +19,7 @@ class LoginSignupWithGoogle extends StatelessWidget {
         if (state is LoginFailure) {
           customSnackBar(
             context: context,
-            errMessage: state.errMessage,
+            message: state.errMessage,
             success: false,
           );
         } else if (state is LoginSuccess) {

@@ -63,4 +63,18 @@ class AuthRepoImpl implements AuthRepo {
       return left(FirebaseFailure('An unexpected error occurred'));
     }
   }
+
+  //* Log out
+  @override
+  Future<Either<Failure, Unit>> logout() async {
+    try {
+      await authService.logout();
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebase(e));
+      }
+      return left(FirebaseFailure('An unexpected error occurred'));
+    }
+  }
 }

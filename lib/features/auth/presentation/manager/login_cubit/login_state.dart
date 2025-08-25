@@ -22,3 +22,14 @@ final class LoginFailure extends LoginState {
 
   const LoginFailure({required this.errMessage});
 }
+
+//* Log out states
+final class LogoutLoading extends LoginState {}
+
+final class LogoutSuccess extends LoginState {}
+
+final class LogoutFailure extends LoginState {
+  final String errMessage;
+
+  const LogoutFailure({required this.errMessage});
+}

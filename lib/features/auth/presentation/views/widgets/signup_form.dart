@@ -28,14 +28,14 @@ class SignupForm extends StatelessWidget {
         if (state is SignupFailure) {
           customSnackBar(
             context: context,
-            errMessage: state.errMessage,
+            message: state.errMessage,
             success: false,
           );
         }
         if (state is SignupSuccess) {
           customSnackBar(
             context: context,
-            errMessage: 'Account created successfully',
+            message: 'Account created successfully',
             success: true,
           );
           GoRouter.of(context).push(AppRouter.kMainScreen);

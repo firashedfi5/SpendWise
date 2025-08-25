@@ -16,4 +16,7 @@ abstract class AuthRepo {
   });
 
   Future<Either<Failure, User>> loginWithGoogle();
+
+  //* Log out
+  Future<Either<Failure, Unit>> logout();
 }

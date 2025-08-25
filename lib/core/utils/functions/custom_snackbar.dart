@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 void customSnackBar({
   required BuildContext context,
-  required String errMessage,
+  required String message,
   required bool success,
 }) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        errMessage,
+        message,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       behavior: SnackBarBehavior.floating,

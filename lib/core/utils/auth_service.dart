@@ -42,4 +42,9 @@ class AuthService {
 
     return await getIt.get<FirebaseAuth>().signInWithCredential(credential);
   }
+
+  //* Log out
+  Future<void> logout() async {
+    getIt.get<FirebaseAuth>().signOut();
+  }
 }
