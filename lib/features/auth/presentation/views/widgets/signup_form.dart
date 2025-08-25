@@ -1,10 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
+import 'package:spendwise/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
 
 class SignupForm extends StatelessWidget {
@@ -21,39 +22,58 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          CustomTextFormField(
-            textController: nameController,
-            label: 'Name',
-            hintText: 'Enter your name',
-          ),
-          const SizedBox(height: 10),
-          CustomTextFormField(
-            textController: emailController,
-            label: 'Email',
-            hintText: 'Enter your email',
-          ),
-          const SizedBox(height: 10),
-          CustomTextFormField(
-            textController: passwordController,
-            label: 'Password',
-            hintText: 'Enter your password',
-          ),
-          const SizedBox(height: 35),
-          CustomElevatedButton(
-            backgroundColor: kPrimaryColor,
-            foregroundColor: Colors.white,
-            label: 'Sign up',
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.kMainScreen);
-              log(nameController.text);
-              log(emailController.text);
-              log(passwordController.text);
-            },
-          ),
-        ],
+    return BlocListener<SignupCubit, SignupState>(
+      listener: (context, state) {
+        if (state is SignupFailure) {
+          customSnackBar(
+            context: context,
+            errMessage: state.errMessage,
+            success: false,
+          );
+        }
+        if (state is SignupSuccess) {
+          customSnackBar(
+            context: context,
+            errMessage: 'Account created successfully',
+            success: true,
+          );
+          GoRouter.of(context).push(AppRouter.kMainScreen);
+        }
+      },
+      child: Form(
+        child: Column(
+          children: [
+            CustomTextFormField(
+              textController: nameController,
+              label: 'Name',
+              hintText: 'Enter your name',
+            ),
+            const SizedBox(height: 10),
+            CustomTextFormField(
+              textController: emailController,
+              label: 'Email',
+              hintText: 'Enter your email',
+            ),
+            const SizedBox(height: 10),
+            CustomTextFormField(
+              textController: passwordController,
+              label: 'Password',
+              hintText: 'Enter your password',
+            ),
+            const SizedBox(height: 35),
+            CustomElevatedButton(
+              backgroundColor: kPrimaryColor,
+              foregroundColor: Colors.white,
+              label: 'Sign up',
+              onPressed: () {
+                BlocProvider.of<SignupCubit>(context).signupUser(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
