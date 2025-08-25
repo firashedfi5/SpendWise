@@ -30,11 +30,6 @@ class LoginForm extends StatelessWidget {
             success: false,
           );
         } else if (state is LoginSuccess) {
-          // customSnackBar(
-          //   context: context,
-          //   errMessage: 'Welcome ',
-          //   success: false,
-          // );
           GoRouter.of(context).push(AppRouter.kMainScreen);
         }
       },
