@@ -25,20 +25,27 @@ class SignupForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignupCubit, SignupState>(
       listener: (context, state) {
-        if (state is SignupFailure) {
+        if (state is SignupLoading) {
+          showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is SignupFailure) {
+          Navigator.of(context).pop();
           customSnackBar(
             context: context,
             message: state.errMessage,
             success: false,
           );
-        }
-        if (state is SignupSuccess) {
+        } else if (state is SignupSuccess) {
+          Navigator.of(context).pop();
           customSnackBar(
             context: context,
             message: 'Account created successfully',
             success: true,
           );
-          GoRouter.of(context).push(AppRouter.kMainScreen);
+          GoRouter.of(context).go(AppRouter.kMainScreen);
         }
       },
       child: Form(

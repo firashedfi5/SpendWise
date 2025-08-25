@@ -13,7 +13,13 @@ class SettingsButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LogoutSuccess) {
+        if (state is LogoutLoading) {
+          showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is LogoutSuccess) {
           GoRouter.of(context).go('/');
         } else if (state is LogoutFailure) {
           customSnackBar(

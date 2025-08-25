@@ -23,14 +23,22 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LoginFailure) {
+        if (state is LoginLoading) {
+          showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is LoginFailure) {
+          Navigator.of(context).pop();
           customSnackBar(
             context: context,
             message: state.errMessage,
             success: false,
           );
         } else if (state is LoginSuccess) {
-          GoRouter.of(context).push(AppRouter.kMainScreen);
+          Navigator.of(context).pop();
+          GoRouter.of(context).go(AppRouter.kMainScreen);
         }
       },
       child: Form(
