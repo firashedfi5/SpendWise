@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
+import 'package:spendwise/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:spendwise/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:spendwise/features/auth/presentation/views/widgets/login_screen_body.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -6,9 +10,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false),
-      body: const LoginScreenBody(),
+    return BlocProvider(
+      create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+      child: Scaffold(
+        appBar: AppBar(automaticallyImplyLeading: false),
+        body: const LoginScreenBody(),
+      ),
     );
   }
 }

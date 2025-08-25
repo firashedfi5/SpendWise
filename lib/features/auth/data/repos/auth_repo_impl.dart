@@ -9,6 +9,7 @@ class AuthRepoImpl implements AuthRepo {
 
   AuthRepoImpl(this.apiService);
 
+  //* Sign up
   @override
   Future<Either<Failure, User>> signupUser({
     required String email,
@@ -16,6 +17,26 @@ class AuthRepoImpl implements AuthRepo {
   }) async {
     try {
       final userCredential = await apiService.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return right(userCredential.user!);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return left(FirebaseFailure.fromFirebase(e));
+      }
+      return left(FirebaseFailure('An unexpected error occurred'));
+    }
+  }
+
+  //* Log in
+  @override
+  Future<Either<Failure, User>> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final userCredential = await apiService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

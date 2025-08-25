@@ -63,14 +63,20 @@ class FirebaseFailure extends Failure {
   FirebaseFailure(super.message);
 
   factory FirebaseFailure.fromFirebase(FirebaseAuthException e) {
-    if (e.code == 'email-already-in-use') {
-      return FirebaseFailure('Email already in use');
-    } else if (e.code == 'invalid-email') {
-      return FirebaseFailure('Invalid email');
-    } else if (e.code == 'weak-password') {
-      return FirebaseFailure('Weak password');
-    } else {
-      return FirebaseFailure('Something went wrong');
+    switch (e.code) {
+      case 'email-already-in-use':
+        return FirebaseFailure('Email already in use');
+      case 'invalid-email':
+        return FirebaseFailure('Invalid email');
+      case 'weak-password':
+        return FirebaseFailure('Weak password');
+      case 'wrong-password':
+        return FirebaseFailure('Wrong password');
+      case 'user-disabled':
+        return FirebaseFailure('User disabled');
+      case 'user-not-found':
+        return FirebaseFailure('User not found');
     }
+    return FirebaseFailure('Something went wrong');
   }
 }
