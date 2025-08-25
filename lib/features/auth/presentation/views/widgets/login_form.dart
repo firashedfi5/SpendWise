@@ -5,8 +5,9 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -46,7 +47,7 @@ class LoginForm extends StatelessWidget {
               hintText: 'Enter your email',
             ),
             const SizedBox(height: 10),
-            CustomTextFormField(
+            PasswordFormField(
               textController: passwordController,
               label: 'Password',
               hintText: 'Enter your password',

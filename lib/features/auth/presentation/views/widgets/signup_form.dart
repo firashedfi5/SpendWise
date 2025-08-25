@@ -6,7 +6,8 @@ import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
+import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class SignupForm extends StatelessWidget {
   const SignupForm({
@@ -55,7 +56,7 @@ class SignupForm extends StatelessWidget {
               hintText: 'Enter your email',
             ),
             const SizedBox(height: 10),
-            CustomTextFormField(
+            PasswordFormField(
               textController: passwordController,
               label: 'Password',
               hintText: 'Enter your password',
@@ -66,7 +67,7 @@ class SignupForm extends StatelessWidget {
               foregroundColor: Colors.white,
               label: 'Sign up',
               onPressed: () {
-                BlocProvider.of<SignupCubit>(context).signupUser(
+                context.read<SignupCubit>().signupUser(
                   email: emailController.text,
                   password: passwordController.text,
                 );
