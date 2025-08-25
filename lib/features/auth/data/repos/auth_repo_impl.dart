@@ -13,12 +13,12 @@ class AuthRepoImpl implements AuthRepo {
 
   //* Sign up
   @override
-  Future<Either<Failure, User>> signupUser({
+  Future<Either<Failure, User>> signup({
     required String email,
     required String password,
   }) async {
     try {
-      final userCredential = await apiService.createUserWithEmailAndPassword(
+      final userCredential = await authService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -33,12 +33,12 @@ class AuthRepoImpl implements AuthRepo {
 
   //* Log in
   @override
-  Future<Either<Failure, User>> loginUser({
+  Future<Either<Failure, User>> login({
     required String email,
     required String password,
   }) async {
     try {
-      final userCredential = await apiService.signInWithEmailAndPassword(
+      final userCredential = await authService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

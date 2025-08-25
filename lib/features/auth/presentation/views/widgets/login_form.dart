@@ -63,7 +63,7 @@ class LoginForm extends StatelessWidget {
               foregroundColor: Colors.white,
               label: 'Log in',
               onPressed: () {
-                context.read<LoginCubit>().loginUser(
+                context.read<LoginCubit>().login(
                   email: emailController.text,
                   password: passwordController.text,
                 );

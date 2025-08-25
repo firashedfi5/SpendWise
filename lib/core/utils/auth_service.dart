@@ -3,7 +3,29 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
 
 class AuthService {
-  //* Log in
+  //* Sign up new user (email/passsword)
+  Future<UserCredential> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) {
+    return getIt.get<FirebaseAuth>().createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  //* Log in with email and password
+  Future<UserCredential> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) {
+    return getIt.get<FirebaseAuth>().signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  //* Sign up or Log in with google
   Future<UserCredential> loginWithGoogle() async {
     final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
 

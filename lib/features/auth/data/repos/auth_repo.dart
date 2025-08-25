@@ -4,13 +4,13 @@ import 'package:spendwise/core/errors/failure.dart';
 
 abstract class AuthRepo {
   //* Sign up
-  Future<Either<Failure, User>> signupUser({
+  Future<Either<Failure, User>> signup({
     required String email,
     required String password,
   });
 
   //* Log in
-  Future<Either<Failure, User>> loginUser({
+  Future<Either<Failure, User>> login({
     required String email,
     required String password,
   });
