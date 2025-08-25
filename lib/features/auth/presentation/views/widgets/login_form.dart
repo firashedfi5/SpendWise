@@ -38,7 +38,7 @@ class LoginForm extends StatelessWidget {
           );
         } else if (state is LoginSuccess) {
           Navigator.of(context).pop();
-          GoRouter.of(context).go(AppRouter.kMainScreen);
+          context.go(AppRouter.kMainScreen);
         }
       },
       child: Form(
@@ -60,8 +60,7 @@ class LoginForm extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                onPressed: () =>
-                    GoRouter.of(context).push(AppRouter.kForgotPasswordScreen),
+                onPressed: () => context.push(AppRouter.kForgotPasswordScreen),
                 child: const Text('Forgot Password'),
               ),
             ),

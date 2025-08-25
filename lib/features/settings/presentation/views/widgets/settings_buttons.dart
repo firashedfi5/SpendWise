@@ -20,7 +20,7 @@ class SettingsButtons extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
           );
         } else if (state is LogoutSuccess) {
-          GoRouter.of(context).go('/');
+          context.go('/');
         } else if (state is LogoutFailure) {
           customSnackBar(
             context: context,

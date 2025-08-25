@@ -71,13 +71,13 @@ extension SettingsButtonsEnumExtension on SettingsButtonsEnum {
   void execute(BuildContext context) {
     switch (this) {
       case SettingsButtonsEnum.accountInfo:
-        GoRouter.of(context).push(AppRouter.kAccountInfoScreen);
+        context.push(AppRouter.kAccountInfoScreen);
         break;
       case SettingsButtonsEnum.language:
-        GoRouter.of(context).push(AppRouter.kLanguageScreen);
+        context.push(AppRouter.kLanguageScreen);
         break;
       case SettingsButtonsEnum.theme:
-        GoRouter.of(context).push(AppRouter.kThemeScreen);
+        context.push(AppRouter.kThemeScreen);
         break;
       case SettingsButtonsEnum.faqs:
         log('FAQs');

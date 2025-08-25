@@ -48,7 +48,7 @@ class _ForgotPasswordScreenBodyState extends State<ForgotPasswordScreenBody> {
                     foregroundColor: Colors.white,
                     label: 'Reset Password',
                     onPressed: () {
-                      GoRouter.of(context).push('/');
+                      context.push('/');
                       log(emailController.text);
                     },
                   ),

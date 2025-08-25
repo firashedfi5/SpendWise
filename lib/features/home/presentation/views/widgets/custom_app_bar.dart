@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => GoRouter.of(context).push(AppRouter.kSettingsScreen),
+          onPressed: () => context.push(AppRouter.kSettingsScreen),
           icon: const Icon(Icons.settings),
         ),
       ],

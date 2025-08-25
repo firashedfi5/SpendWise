@@ -45,7 +45,7 @@ class SignupForm extends StatelessWidget {
             message: 'Account created successfully',
             success: true,
           );
-          GoRouter.of(context).go(AppRouter.kMainScreen);
+          context.go(AppRouter.kMainScreen);
         }
       },
       child: Form(
