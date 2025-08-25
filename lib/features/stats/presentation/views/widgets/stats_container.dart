@@ -12,7 +12,7 @@ class StatsContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: kPadding24, vertical: 20),
       sliver: SliverToBoxAdapter(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.45,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
