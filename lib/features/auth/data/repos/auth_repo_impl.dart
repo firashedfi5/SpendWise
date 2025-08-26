@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spendwise/core/errors/failure.dart';
 import 'package:spendwise/core/utils/api_service.dart';
 import 'package:spendwise/core/utils/auth_service.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
 import 'package:spendwise/features/auth/data/repos/auth_repo.dart';
 
@@ -18,13 +19,19 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, User>> signup({
     required String email,
     required String password,
+    required String username,
   }) async {
     try {
       final userCredential = await authService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return right(userCredential.user!);
+
+      await userCredential.user?.updateDisplayName(username);
+      await userCredential.user?.reload();
+      final updatedUser = getIt.get<FirebaseAuth>().currentUser;
+
+      return right(updatedUser!);
     } catch (e) {
       if (e is FirebaseAuthException) {
         return left(FirebaseFailure.fromFirebase(e));

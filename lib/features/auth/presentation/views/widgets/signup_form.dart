@@ -44,8 +44,8 @@ class SignupForm extends StatelessWidget {
           context.read<SignupCubit>().createUser(
             user: UserModel(
               userId: state.user.uid,
-              username: nameController.text,
-              email: emailController.text,
+              username: state.user.displayName,
+              email: state.user.email,
             ),
           );
           customSnackBar(
@@ -92,6 +92,7 @@ class SignupForm extends StatelessWidget {
                 context.read<SignupCubit>().signup(
                   email: emailController.text,
                   password: passwordController.text,
+                  username: nameController.text,
                 );
               },
             ),

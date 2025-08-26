@@ -8,6 +8,7 @@ abstract class AuthRepo {
   Future<Either<Failure, User>> signup({
     required String email,
     required String password,
+    required String username,
   });
 
   //* Store user info in SQL Server
