@@ -10,7 +10,7 @@ class SettingsHeader extends StatelessWidget {
     return const Column(
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage(AssetsData.testProfilePicture),
+          backgroundImage: AssetImage(AssetsData.defaultAvatar),
           radius: 85,
         ),
         SizedBox(height: 10),

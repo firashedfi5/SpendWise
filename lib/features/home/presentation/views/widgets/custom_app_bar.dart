@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.red,
-            backgroundImage: AssetImage(AssetsData.testProfilePicture),
+            backgroundImage: AssetImage(AssetsData.defaultAvatar),
           ),
           SizedBox(width: 10),
           Column(
