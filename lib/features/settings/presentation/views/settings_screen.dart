@@ -11,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(getIt.get<AuthRepoImpl>()),
+      create: (context) => AuthCubit(getIt.get<AuthRepoImpl>()),
       child: Scaffold(
         appBar: AppBar(title: const Text('Settings'), centerTitle: true),
         body: const SettingsScreenBody(),

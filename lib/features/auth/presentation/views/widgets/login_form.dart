@@ -21,7 +21,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginLoading) {
           showDialog(
@@ -70,7 +70,7 @@ class LoginForm extends StatelessWidget {
               foregroundColor: Colors.white,
               label: 'Log in',
               onPressed: () {
-                context.read<LoginCubit>().login(
+                context.read<AuthCubit>().login(
                   email: emailController.text,
                   password: passwordController.text,
                 );

@@ -7,7 +7,7 @@ import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
-import 'package:spendwise/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
+import 'package:spendwise/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class SignupForm extends StatelessWidget {
@@ -24,7 +24,7 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignupCubit, SignupState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SignupLoading) {
           showDialog(
@@ -41,17 +41,12 @@ class SignupForm extends StatelessWidget {
           );
         } else if (state is SignupSuccess) {
           Navigator.of(context).pop();
-          context.read<SignupCubit>().createUser(
+          context.read<AuthCubit>().createUser(
             user: UserModel(
               userId: state.user.uid,
               username: state.user.displayName,
               email: state.user.email,
             ),
-          );
-          customSnackBar(
-            context: context,
-            message: 'Account created successfully',
-            success: true,
           );
         } else if (state is UserCreationFailure) {
           customSnackBar(
@@ -60,6 +55,11 @@ class SignupForm extends StatelessWidget {
             success: false,
           );
         } else if (state is UserCreationSuccess) {
+          customSnackBar(
+            context: context,
+            message: 'Account created successfully',
+            success: true,
+          );
           context.go(AppRouter.kMainScreen);
         }
       },
@@ -89,7 +89,7 @@ class SignupForm extends StatelessWidget {
               foregroundColor: Colors.white,
               label: 'Sign up',
               onPressed: () {
-                context.read<SignupCubit>().signup(
+                context.read<AuthCubit>().signup(
                   email: emailController.text,
                   password: passwordController.text,
                   username: nameController.text,

@@ -86,7 +86,7 @@ extension SettingsButtonsEnumExtension on SettingsButtonsEnum {
         log('Send Feedback');
         break;
       case SettingsButtonsEnum.logout:
-        context.read<LoginCubit>().logout();
+        context.read<AuthCubit>().logout();
         break;
     }
   }

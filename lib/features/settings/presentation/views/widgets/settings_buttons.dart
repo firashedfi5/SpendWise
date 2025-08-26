@@ -11,7 +11,7 @@ class SettingsButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LogoutLoading) {
           showDialog(
