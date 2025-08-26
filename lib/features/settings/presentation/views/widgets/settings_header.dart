@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/utils/assets.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class SettingsHeader extends StatelessWidget {
@@ -7,15 +9,18 @@ class SettingsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        CircleAvatar(
+        const CircleAvatar(
           backgroundImage: AssetImage(AssetsData.defaultAvatar),
           radius: 85,
         ),
-        SizedBox(height: 10),
-        Text('Dina Hedfi', style: Styles.textStyle22),
-        Text('dinahedfi4@gmail.com'),
+        const SizedBox(height: 10),
+        Text(
+          getIt.get<FirebaseAuth>().currentUser!.displayName ?? 'Unkown',
+          style: Styles.textStyle22,
+        ),
+        Text(getIt.get<FirebaseAuth>().currentUser!.email ?? ''),
       ],
     );
   }

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/assets.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -11,18 +13,21 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      title: const Row(
+      title: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             backgroundColor: Colors.red,
             backgroundImage: AssetImage(AssetsData.defaultAvatar),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Welcome!', style: Styles.textStyle14),
-              Text('Dina Hedfi', style: Styles.textStyle18),
+              const Text('Welcome!', style: Styles.textStyle14),
+              Text(
+                getIt.get<FirebaseAuth>().currentUser!.displayName ?? 'Unkown',
+                style: Styles.textStyle18,
+              ),
             ],
           ),
         ],
