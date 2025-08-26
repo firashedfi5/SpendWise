@@ -17,8 +17,7 @@ class AddTransactionButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () =>
-                  GoRouter.of(context).push(AppRouter.kAddIncomeScreen),
+              onTap: () => context.push(AppRouter.kAddIncomeScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
                 height: 85,
@@ -43,8 +42,7 @@ class AddTransactionButtons extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () =>
-                  GoRouter.of(context).push(AppRouter.kAddExpenseScreen),
+              onTap: () => context.push(AppRouter.kAddExpenseScreen),
               child: Container(
                 width: MediaQuery.of(context).size.width * .4,
                 height: 85,

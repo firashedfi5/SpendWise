@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 class LoginSignupWithGoogle extends StatelessWidget {
   const LoginSignupWithGoogle({super.key, required this.isLogin});
@@ -30,7 +32,9 @@ class LoginSignupWithGoogle extends StatelessWidget {
             ),
             fixedSize: Size(MediaQuery.of(context).size.width, 45),
           ),
-          onPressed: () {},
+          onPressed: () => isLogin == true
+              ? context.read<AuthCubit>().loginWithGoogle()
+              : context.read<AuthCubit>().signupWithGoogle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

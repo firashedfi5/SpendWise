@@ -49,8 +49,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                 const SizedBox(width: 4),
                 TextButton(
                   style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                  onPressed: () =>
-                      GoRouter.of(context).push(AppRouter.kSignupScreen),
+                  onPressed: () => context.push(AppRouter.kSignupScreen),
                   child: const Text('Sign up'),
                 ),
               ],

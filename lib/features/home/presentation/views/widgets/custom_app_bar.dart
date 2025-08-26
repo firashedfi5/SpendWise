@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.red,
-            backgroundImage: AssetImage(AssetsData.testProfilePicture),
+            backgroundImage: AssetImage(AssetsData.defaultAvatar),
           ),
           SizedBox(width: 10),
           Column(
@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => GoRouter.of(context).push(AppRouter.kSettingsScreen),
+          onPressed: () => context.push(AppRouter.kSettingsScreen),
           icon: const Icon(Icons.settings),
         ),
       ],

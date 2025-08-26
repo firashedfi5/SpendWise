@@ -3,7 +3,7 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/amount_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/choose_date.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/select_category.dart';
 
 class AddExpenseScreenBody extends StatefulWidget {

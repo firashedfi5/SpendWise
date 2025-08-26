@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 
 class ForgotPasswordScreenBody extends StatefulWidget {
   const ForgotPasswordScreenBody({super.key});
@@ -48,7 +48,7 @@ class _ForgotPasswordScreenBodyState extends State<ForgotPasswordScreenBody> {
                     foregroundColor: Colors.white,
                     label: 'Reset Password',
                     onPressed: () {
-                      GoRouter.of(context).push('/');
+                      context.push('/');
                       log(emailController.text);
                     },
                   ),

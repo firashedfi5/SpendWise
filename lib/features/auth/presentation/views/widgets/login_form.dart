@@ -1,11 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -19,42 +21,63 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          CustomTextFormField(
-            textController: emailController,
-            label: 'Email',
-            hintText: 'Enter your email',
-          ),
-          const SizedBox(height: 10),
-          CustomTextFormField(
-            textController: passwordController,
-            label: 'Password',
-            hintText: 'Enter your password',
-          ),
-          const SizedBox(height: 6),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-              onPressed: () =>
-                  GoRouter.of(context).push(AppRouter.kForgotPasswordScreen),
-              child: const Text('Forgot Password'),
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is LoginLoading) {
+          showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is LoginFailure) {
+          Navigator.of(context).pop();
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
+        } else if (state is LoginSuccess) {
+          Navigator.of(context).pop();
+          context.go(AppRouter.kMainScreen);
+        }
+      },
+      child: Form(
+        child: Column(
+          children: [
+            CustomTextFormField(
+              textController: emailController,
+              label: 'Email',
+              hintText: 'Enter your email',
             ),
-          ),
-          const SizedBox(height: 6),
-          CustomElevatedButton(
-            backgroundColor: kPrimaryColor,
-            foregroundColor: Colors.white,
-            label: 'Log in',
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.kMainScreen);
-              log(emailController.text);
-              log(passwordController.text);
-            },
-          ),
-        ],
+            const SizedBox(height: 10),
+            PasswordFormField(
+              textController: passwordController,
+              label: 'Password',
+              hintText: 'Enter your password',
+            ),
+            const SizedBox(height: 6),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                onPressed: () => context.push(AppRouter.kForgotPasswordScreen),
+                child: const Text('Forgot Password'),
+              ),
+            ),
+            const SizedBox(height: 6),
+            CustomElevatedButton(
+              backgroundColor: kPrimaryColor,
+              foregroundColor: Colors.white,
+              label: 'Log in',
+              onPressed: () {
+                context.read<AuthCubit>().login(
+                  email: emailController.text,
+                  password: passwordController.text,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

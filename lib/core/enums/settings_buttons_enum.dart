@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 enum SettingsButtonsEnum {
   accountInfo,
@@ -69,13 +71,13 @@ extension SettingsButtonsEnumExtension on SettingsButtonsEnum {
   void execute(BuildContext context) {
     switch (this) {
       case SettingsButtonsEnum.accountInfo:
-        GoRouter.of(context).push(AppRouter.kAccountInfoScreen);
+        context.push(AppRouter.kAccountInfoScreen);
         break;
       case SettingsButtonsEnum.language:
-        GoRouter.of(context).push(AppRouter.kLanguageScreen);
+        context.push(AppRouter.kLanguageScreen);
         break;
       case SettingsButtonsEnum.theme:
-        GoRouter.of(context).push(AppRouter.kThemeScreen);
+        context.push(AppRouter.kThemeScreen);
         break;
       case SettingsButtonsEnum.faqs:
         log('FAQs');
@@ -84,7 +86,7 @@ extension SettingsButtonsEnumExtension on SettingsButtonsEnum {
         log('Send Feedback');
         break;
       case SettingsButtonsEnum.logout:
-        log('Logout');
+        context.read<AuthCubit>().logout();
         break;
     }
   }
