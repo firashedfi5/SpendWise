@@ -75,4 +75,6 @@ class AuthCubit extends Cubit<AuthState> {
       (success) => emit(LogoutSuccess()),
     );
   }
+
+  //TODO: Keep the user logged in
 }
