@@ -22,3 +22,14 @@ final class SignupFailure extends SignupState {
 
   const SignupFailure({required this.errMessage});
 }
+
+//* User creation state
+final class UserCreationLoading extends SignupState {}
+
+final class UserCreationSuccess extends SignupState {}
+
+final class UserCreationFailure extends SignupState {
+  final String errMessage;
+
+  const UserCreationFailure({required this.errMessage});
+}

@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'depanini-v1.firebasestorage.app',
     iosBundleId: 'com.example.spendwise',
   );
-
 }

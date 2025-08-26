@@ -6,6 +6,7 @@ import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/core/widgets/custom_text_form_field.dart';
+import 'package:spendwise/features/auth/data/models/user_model.dart';
 import 'package:spendwise/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
@@ -40,11 +41,25 @@ class SignupForm extends StatelessWidget {
           );
         } else if (state is SignupSuccess) {
           Navigator.of(context).pop();
+          context.read<SignupCubit>().createUser(
+            user: UserModel(
+              userId: state.user.uid,
+              username: nameController.text,
+              email: emailController.text,
+            ),
+          );
           customSnackBar(
             context: context,
             message: 'Account created successfully',
             success: true,
           );
+        } else if (state is UserCreationFailure) {
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
+        } else if (state is UserCreationSuccess) {
           context.go(AppRouter.kMainScreen);
         }
       },

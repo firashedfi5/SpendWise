@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/features/auth/data/models/user_model.dart';
 import 'package:spendwise/features/auth/data/repos/auth_repo.dart';
 
 part 'signup_state.dart';
@@ -25,6 +26,15 @@ class SignupCubit extends Cubit<SignupState> {
     result.fold(
       (failure) => emit(SignupFailure(errMessage: failure.message)),
       (user) => emit(SignupSuccess(user: user)),
+    );
+  }
+
+  Future<void> createUser({required UserModel user}) async {
+    emit(UserCreationLoading());
+    final result = await _authRepo.createUser(user);
+    result.fold(
+      (failure) => emit(UserCreationFailure(errMessage: failure.message)),
+      (user) => emit(UserCreationSuccess()),
     );
   }
 }
