@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/utils/app_router.dart';
-import 'package:spendwise/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 
 enum SettingsButtonsEnum {
   accountInfo,

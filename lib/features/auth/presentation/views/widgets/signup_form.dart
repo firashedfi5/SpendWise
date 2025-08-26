@@ -7,7 +7,7 @@ import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
-import 'package:spendwise/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class SignupForm extends StatelessWidget {

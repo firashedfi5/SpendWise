@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
 import 'package:spendwise/features/auth/data/repos/auth_repo.dart';
 
-part 'login_state.dart';
+part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._authRepo) : super(AuthInitial());
