@@ -44,7 +44,12 @@ class CategorySelector extends StatelessWidget {
                   return Column(
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () {
+                          final String selectedCategory = isIncome == true
+                              ? incomeCategory.name
+                              : expenseCategory.name;
+                          Navigator.of(context).pop(selectedCategory);
+                        },
                         child: Container(
                           width: 55,
                           height: 55,

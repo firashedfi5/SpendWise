@@ -10,6 +10,9 @@ class TransactionsCubit extends Cubit<TransactionsState> {
 
   final TransactionsRepo _transactionsRepo;
 
+  DateTime date = DateTime.now();
+  String? category;
+
   Future<void> addTransaction({required TransactionModel transaction}) async {
     emit(TransactionsLoading());
     final result = await _transactionsRepo.addTransaction(

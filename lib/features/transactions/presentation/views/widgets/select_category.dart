@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/category_selector.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -20,12 +22,17 @@ class SelectCategory extends StatelessWidget {
             const SizedBox(width: 8),
             FilterChip(label: const Text('Discount'), onSelected: (value) {}),
             IconButton(
-              onPressed: () {
-                showModalBottomSheet(
+              onPressed: () async {
+                final cubit = context.read<TransactionsCubit>();
+
+                final String? selectedCategory = await showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
                   builder: (context) => CategorySelector(isIncome: isIncome),
                 );
+                if (selectedCategory != null) {
+                  cubit.category = selectedCategory;
+                }
               },
               icon: const Icon(Icons.add, size: 30),
             ),
