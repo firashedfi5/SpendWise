@@ -5,6 +5,7 @@ import 'package:spendwise/core/utils/api_service.dart';
 import 'package:spendwise/core/utils/auth_service.dart';
 import 'package:spendwise/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:spendwise/features/home/data/repos/home_repo_impl.dart';
+import 'package:spendwise/features/transactions/data/repo/transactions_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -16,4 +17,7 @@ void setup() {
     AuthRepoImpl(getIt.get<ApiService>(), getIt.get<AuthService>()),
   );
   getIt.registerSingleton<HomeRepoImpl>(HomeRepoImpl(getIt.get<ApiService>()));
+  getIt.registerSingleton<TransactionsRepoImpl>(
+    TransactionsRepoImpl(getIt.get<ApiService>()),
+  );
 }
