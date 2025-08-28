@@ -18,3 +18,9 @@ final class TransactionsFailure extends TransactionsState {
 
   const TransactionsFailure({required this.errMessage});
 }
+
+//* Category state
+class CategoryUpdated extends TransactionsState {
+  final String category;
+  const CategoryUpdated(this.category);
+}

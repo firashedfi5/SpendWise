@@ -13,6 +13,11 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   DateTime date = DateTime.now();
   String? category;
 
+  void setCategory(String selectedCategory) {
+    category = selectedCategory;
+    emit(CategoryUpdated(selectedCategory));
+  }
+
   Future<void> addTransaction({required TransactionModel transaction}) async {
     emit(TransactionsLoading());
     final result = await _transactionsRepo.addTransaction(
