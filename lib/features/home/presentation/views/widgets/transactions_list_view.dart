@@ -28,8 +28,10 @@ class TransactionsListView extends StatelessWidget {
           if (state is HomeSuccess) {
             return SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-                return const TransactionsListViewItem();
-              }, childCount: childCount),
+                return TransactionsListViewItem(
+                  transaction: state.transactions[index],
+                );
+              }, childCount: state.transactions.length),
             );
           } else if (state is HomeFailure) {
             return const SliverToBoxAdapter(
