@@ -65,8 +65,8 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                   backgroundColor: kPrimaryColor,
                   foregroundColor: Colors.white,
                   label: 'Add Income',
-                  onPressed: () {
-                    context.read<TransactionsCubit>().addTransaction(
+                  onPressed: () async {
+                    await context.read<TransactionsCubit>().addTransaction(
                       transaction: TransactionModel(
                         id: 0,
                         userId: getIt.get<FirebaseAuth>().currentUser!.uid,
