@@ -77,7 +77,7 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                         date: context.read<TransactionsCubit>().date,
                       ),
                     );
-                    context.pop();
+                    if (context.mounted) context.pop();
                   },
                 ),
               ],

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/styles.dart';
@@ -13,45 +11,40 @@ class SelectCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TransactionsCubit, TransactionsState>(
-      builder: (context, state) {
-        String? category;
-        if (state is CategoryUpdated) {
-          category = state.category;
-        }
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Category', style: Styles.textStyle18),
+        const SizedBox(height: 8),
+        Row(
           children: [
-            const Text('Category', style: Styles.textStyle18),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                FilterChip(
-                  label: Text(category ?? 'Select category'),
-                  onSelected: (value) {},
-                ),
-                IconButton(
-                  onPressed: () async {
-                    final cubit = context.read<TransactionsCubit>();
+            BlocBuilder<TransactionsCubit, TransactionsState>(
+              builder: (context, state) {
+                String? category;
+                if (state is CategoryUpdated) {
+                  category = state.category;
+                }
+                return Chip(label: Text(category ?? 'Select category'));
+              },
+            ),
+            IconButton(
+              onPressed: () async {
+                final cubit = context.read<TransactionsCubit>();
 
-                    final String? selectedCategory = await showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (context) =>
-                          CategorySelector(isIncome: isIncome),
-                    );
-                    if (selectedCategory != null) {
-                      cubit.setCategory(selectedCategory);
-                    }
-                    log(cubit.category ?? '');
-                  },
-                  icon: const Icon(Icons.add, size: 30),
-                ),
-              ],
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => BlocProvider.value(
+                    value: cubit,
+                    child: CategorySelector(isIncome: isIncome),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.add, size: 30),
             ),
           ],
-        );
-      },
+        ),
+      ],
     );
   }
 }

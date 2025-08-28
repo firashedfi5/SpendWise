@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/enums/expense_categories.dart';
 import 'package:spendwise/core/enums/income_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
 
 class CategorySelector extends StatelessWidget {
   const CategorySelector({super.key, required this.isIncome});
@@ -48,7 +50,11 @@ class CategorySelector extends StatelessWidget {
                           final String selectedCategory = isIncome == true
                               ? incomeCategory.name
                               : expenseCategory.name;
-                          Navigator.of(context).pop(selectedCategory);
+
+                          context.read<TransactionsCubit>().setCategory(
+                            selectedCategory,
+                          );
+                          Navigator.of(context).pop();
                         },
                         child: Container(
                           width: 55,
