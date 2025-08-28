@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/core/utils/functions/date_formating.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
@@ -28,7 +29,7 @@ class TransactionsListViewItem extends StatelessWidget {
               Text(transaction.title ?? '', style: Styles.textStyle18),
               const SizedBox(height: 4),
               Text(
-                transaction.date!.toIso8601String(),
+                formatDate(transaction.date!),
                 style: const TextStyle(color: Colors.blueGrey),
               ),
             ],

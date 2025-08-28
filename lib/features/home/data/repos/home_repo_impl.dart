@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spendwise/core/errors/failure.dart';
 import 'package:spendwise/core/utils/api_service.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/home/data/repos/home_repo.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
@@ -29,7 +31,9 @@ class HomeRepoImpl implements HomeRepo {
     required String userId,
   }) async {
     try {
-      final data = await _apiService.get(endPoint: '/Transactions');
+      final data = await _apiService.get(
+        endPoint: '/Transactions/${getIt.get<FirebaseAuth>().currentUser!.uid}',
+      );
       List<TransactionModel> transactions = [];
       for (var item in data['data']) {
         transactions.add(TransactionModel.fromJson(item));
