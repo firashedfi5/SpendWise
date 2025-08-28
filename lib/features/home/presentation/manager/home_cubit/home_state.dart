@@ -12,9 +12,9 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeSuccess extends HomeState {
-  final UserModel user;
+  final List<TransactionModel> transactions;
 
-  const HomeSuccess({required this.user});
+  const HomeSuccess({required this.transactions});
 }
 
 final class HomeFailure extends HomeState {
