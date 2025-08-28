@@ -22,7 +22,7 @@ class ServerFailure extends Failure {
         return ServerFailure('Bad certificate with API server');
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
-          e.response!.statusCode!,
+          e.response!.statusCode ?? 0,
           e.response!.data,
         );
       case DioExceptionType.cancel:
@@ -44,10 +44,40 @@ class ServerFailure extends Failure {
         'There is a problem with the server, please try again later',
       );
     } else if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(response['error']['message']);
+      return ServerFailure(_extractAspNetError(response));
     } else {
       return ServerFailure('There was an error, please try again later');
     }
+  }
+
+  //* Specific for ASP.NET Core Web API
+  static String _extractAspNetError(dynamic response) {
+    if (response == null) {
+      return 'Bad request occurred';
+    }
+
+    if (response is String) {
+      return response;
+    }
+
+    if (response is Map<String, dynamic>) {
+      if (response.containsKey('errors') && response['errors'] is Map) {
+        final errors = response['errors'] as Map<String, dynamic>;
+        if (errors.isNotEmpty) {
+          final firstFieldErrors = errors.values.first;
+          if (firstFieldErrors is List && firstFieldErrors.isNotEmpty) {
+            return firstFieldErrors.first.toString();
+          }
+        }
+      }
+
+      return response['title'] ??
+          response['message'] ??
+          response['detail'] ??
+          'Bad request occurred';
+    }
+
+    return 'Bad request occurred';
   }
 }
 

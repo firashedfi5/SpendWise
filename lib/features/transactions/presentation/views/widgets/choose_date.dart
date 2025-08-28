@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ChooseDate extends StatefulWidget {
@@ -55,7 +57,7 @@ class _ChooseDateState extends State<ChooseDate> {
               today = selectedDay;
               focusedDay = newFocusedDay;
             });
-            // BlocProvider.of<TaskCubit>(context).date = selectedDay;
+            context.read<TransactionsCubit>().date = selectedDay;
           },
         ),
       ),
