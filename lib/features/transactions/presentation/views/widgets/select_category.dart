@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/styles.dart';
@@ -11,34 +13,45 @@ class SelectCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('Category', style: Styles.textStyle18),
-        const SizedBox(height: 8),
-        Row(
+    return BlocBuilder<TransactionsCubit, TransactionsState>(
+      builder: (context, state) {
+        String? category;
+        if (state is CategoryUpdated) {
+          category = state.category;
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FilterChip(label: const Text('Salary'), onSelected: (value) {}),
-            const SizedBox(width: 8),
-            FilterChip(label: const Text('Discount'), onSelected: (value) {}),
-            IconButton(
-              onPressed: () async {
-                final cubit = context.read<TransactionsCubit>();
+            const Text('Category', style: Styles.textStyle18),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                FilterChip(
+                  label: Text(category ?? 'Select category'),
+                  onSelected: (value) {},
+                ),
+                IconButton(
+                  onPressed: () async {
+                    final cubit = context.read<TransactionsCubit>();
 
-                final String? selectedCategory = await showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (context) => CategorySelector(isIncome: isIncome),
-                );
-                if (selectedCategory != null) {
-                  cubit.category = selectedCategory;
-                }
-              },
-              icon: const Icon(Icons.add, size: 30),
+                    final String? selectedCategory = await showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) =>
+                          CategorySelector(isIncome: isIncome),
+                    );
+                    if (selectedCategory != null) {
+                      cubit.setCategory(selectedCategory);
+                    }
+                    log(cubit.category ?? '');
+                  },
+                  icon: const Icon(Icons.add, size: 30),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

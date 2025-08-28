@@ -23,4 +23,7 @@ final class TransactionsFailure extends TransactionsState {
 class CategoryUpdated extends TransactionsState {
   final String category;
   const CategoryUpdated(this.category);
+
+  @override
+  List<Object> get props => [category];
 }
