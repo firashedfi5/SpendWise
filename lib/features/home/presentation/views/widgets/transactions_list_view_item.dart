@@ -36,11 +36,11 @@ class TransactionsListViewItem extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            transaction.amount! > 0
-                ? '+${transaction.amount.toString()}'
-                : transaction.amount.toString(),
+            transaction.type! == 'Income'
+                ? '+\$${transaction.amount.toString()}'
+                : '-\$${transaction.amount.toString()}',
             style: Styles.textStyle14.copyWith(
-              color: transaction.amount! > 0 ? Colors.green : Colors.red,
+              color: transaction.type! == 'Income' ? Colors.green : Colors.red,
               fontWeight: FontWeight.bold,
             ),
           ),

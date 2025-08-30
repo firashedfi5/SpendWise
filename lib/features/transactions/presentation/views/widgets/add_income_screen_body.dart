@@ -72,7 +72,7 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                         userId: getIt.get<FirebaseAuth>().currentUser!.uid,
                         type: 'Income',
                         title: titleController.text,
-                        amount: int.parse(amountController.text),
+                        amount: double.parse(amountController.text),
                         category: context.read<TransactionsCubit>().category,
                         date: context.read<TransactionsCubit>().date,
                       ),

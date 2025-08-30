@@ -5,7 +5,7 @@ class TransactionModel extends Equatable {
   final String? userId;
   final String? type;
   final String? title;
-  final num? amount;
+  final double? amount;
   final String? category;
   final DateTime? date;
 
@@ -25,7 +25,7 @@ class TransactionModel extends Equatable {
       userId: json['userId'] as String?,
       type: json['type'] as String?,
       title: json['title'] as String?,
-      amount: json['amount'] as num?,
+      amount: json['amount'] as double?,
       category: json['category'] as String?,
       date: json['date'] == null
           ? null
@@ -48,7 +48,7 @@ class TransactionModel extends Equatable {
     String? userId,
     String? type,
     String? title,
-    num? amount,
+    double? amount,
     String? category,
     DateTime? date,
   }) {

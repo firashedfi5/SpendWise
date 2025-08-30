@@ -51,4 +51,40 @@ class HomeCubit extends Cubit<HomeState> {
 
     return const Icon(Icons.help_outline);
   }
+
+  double getTotalBalance({required List<TransactionModel> transactions}) {
+    double totalBalance = 0;
+    for (var transaction in transactions) {
+      if (transaction.type == 'Income') {
+        totalBalance += transaction.amount!;
+      } else {
+        totalBalance -= transaction.amount!;
+      }
+    }
+    return totalBalance;
+  }
+
+  double getTotalIncome({required List<TransactionModel> transactions}) {
+    double totalIncome = 0;
+    for (var transaction in transactions) {
+      if (transaction.type == 'Income') {
+        totalIncome += transaction.amount!;
+      } else {
+        totalIncome += 0;
+      }
+    }
+    return totalIncome;
+  }
+
+  double getTotalExpenses({required List<TransactionModel> transactions}) {
+    double totalExpenses = 0;
+    for (var transaction in transactions) {
+      if (transaction.type == 'Expense') {
+        totalExpenses += transaction.amount!;
+      } else {
+        totalExpenses += 0;
+      }
+    }
+    return totalExpenses;
+  }
 }
