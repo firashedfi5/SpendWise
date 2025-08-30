@@ -14,7 +14,7 @@ class AddTransactionScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())
         ..getTransactions(userId: getIt.get<FirebaseAuth>().currentUser!.uid),
-      child: const Scaffold(body: AddTransactionScreenBody()),
+      child: const Scaffold(body: SafeArea(child: AddTransactionScreenBody())),
     );
   }
 }
