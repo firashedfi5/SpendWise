@@ -8,9 +8,7 @@ import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cub
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_item.dart';
 
 class TransactionsListView extends StatelessWidget {
-  const TransactionsListView({super.key, required this.childCount});
-
-  final int childCount;
+  const TransactionsListView({super.key});
 
   @override
   Widget build(BuildContext context) {
