@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_item.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_item_loading.dart';
-import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_loading.dart';
 
 class TransactionsListView extends StatelessWidget {
   const TransactionsListView({super.key});
@@ -86,32 +84,7 @@ class TransactionsListView extends StatelessWidget {
               ),
             );
           } else if (state is HomeLoading) {
-            return SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return Skeletonizer(
-                  enabled: true,
-                  enableSwitchAnimation: true,
-                  effect: ShimmerEffect(
-                    duration: const Duration(milliseconds: 1000),
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    baseColor: Colors.grey[400]!,
-                    highlightColor: Colors.grey[100]!,
-                  ),
-                  child: TransactionsListViewItemLoading(
-                    transaction: TransactionModel(
-                      id: 1,
-                      title: 'Some text',
-                      category: 'Some text',
-                      amount: 200,
-                      date: DateTime.now(),
-                      type: 'Income',
-                      userId: 'qsldkjfqljskdf',
-                    ),
-                  ),
-                );
-              }, childCount: 3),
-            );
+            return const TransactionsListViewLoading();
           }
           return const SliverToBoxAdapter(child: SizedBox());
         },
