@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/enums/expense_categories.dart';
 import 'package:spendwise/core/enums/income_categories.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/home/data/repos/home_repo.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
@@ -13,18 +15,11 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepo _homeRepo;
 
-  // Future<void> getUserData({required String userId}) async {
-  //   emit(HomeLoading());
-  //   final result = await _homeRepo.getUser(userId: userId);
-  //   result.fold(
-  //     (failure) => emit(HomeFailure(errMessage: failure.message)),
-  //     (user) => emit(HomeSuccess(user: user)),
-  //   );
-  // }
-
-  Future<void> getTransactions({required String userId}) async {
+  Future<void> getTransactions() async {
     emit(HomeLoading());
-    final result = await _homeRepo.getTransactions(userId: userId);
+    final result = await _homeRepo.getTransactions(
+      userId: getIt.get<FirebaseAuth>().currentUser!.uid,
+    );
     result.fold(
       (failure) => emit(HomeFailure(errMessage: failure.message)),
       (transactions) => emit(HomeSuccess(transactions: transactions)),

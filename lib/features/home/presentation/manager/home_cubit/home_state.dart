@@ -22,5 +22,3 @@ final class HomeFailure extends HomeState {
 
   const HomeFailure({required this.errMessage});
 }
-
-final class HomeRefresh extends HomeState {}

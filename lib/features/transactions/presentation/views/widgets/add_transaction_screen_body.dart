@@ -19,7 +19,7 @@ class AddTransactionScreenBody extends StatelessWidget {
             child: Text('Last Added', style: Styles.textStyle18),
           ),
         ),
-        TransactionsListView(childCount: 6),
+        TransactionsListView(),
       ],
     );
   }
