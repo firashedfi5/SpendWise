@@ -8,4 +8,6 @@ abstract class HomeRepo {
   Future<Either<Failure, List<TransactionModel>>> getTransactions({
     required String userId,
   });
+
+  Future<Either<Failure, Unit>> deleteTransaction({required int id});
 }
