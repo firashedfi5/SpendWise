@@ -4,6 +4,7 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/functions/card_gradient.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class HomeCard extends StatelessWidget {
   const HomeCard({super.key});
@@ -15,18 +16,21 @@ class HomeCard extends StatelessWidget {
       sliver: SliverToBoxAdapter(
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
+            List<TransactionModel> transactions = context
+                .read<HomeCubit>()
+                .transactionsList;
             double totalBalance = 0;
             double totalIncome = 0;
             double totalExpenses = 0;
             if (state is HomeSuccess) {
               totalBalance = context.read<HomeCubit>().getTotalBalance(
-                transactions: state.transactions,
+                transactions: transactions,
               );
               totalIncome = context.read<HomeCubit>().getTotalIncome(
-                transactions: state.transactions,
+                transactions: transactions,
               );
               totalExpenses = context.read<HomeCubit>().getTotalExpenses(
-                transactions: state.transactions,
+                transactions: transactions,
               );
             }
             return Card(

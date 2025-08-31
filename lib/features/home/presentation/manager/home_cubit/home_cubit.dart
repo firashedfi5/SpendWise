@@ -15,16 +15,20 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepo _homeRepo;
 
+  List<TransactionModel> transactionsList = [];
+
   Future<void> getTransactions() async {
     emit(HomeLoading());
     // await Future.delayed(const Duration(seconds: 5));
     final result = await _homeRepo.getTransactions(
       userId: getIt.get<FirebaseAuth>().currentUser!.uid,
     );
-    result.fold(
-      (failure) => emit(HomeFailure(errMessage: failure.message)),
-      (transactions) => emit(HomeSuccess(transactions: transactions)),
-    );
+    result.fold((failure) => emit(HomeFailure(errMessage: failure.message)), (
+      transactions,
+    ) {
+      transactionsList = transactions;
+      emit(HomeSuccess());
+    });
   }
 
   Widget getCategoryIcon({
@@ -82,5 +86,14 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
     return totalExpenses;
+  }
+
+  Future<void> deleteTransaction({required int id}) async {
+    emit(DeletingLoading());
+    final result = await _homeRepo.deleteTransaction(id: id);
+    result.fold(
+      (l) => emit(DeletingFailure(errMessage: l.message)),
+      (r) => emit(HomeSuccess()),
+    );
   }
 }
