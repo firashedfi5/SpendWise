@@ -17,6 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getTransactions() async {
     emit(HomeLoading());
+    // await Future.delayed(const Duration(seconds: 5));
     final result = await _homeRepo.getTransactions(
       userId: getIt.get<FirebaseAuth>().currentUser!.uid,
     );
