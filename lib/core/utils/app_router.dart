@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/features/auth/presentation/views/forgot_passwrod_screen.dart';
 import 'package:spendwise/features/auth/presentation/views/login_screen.dart';
@@ -24,7 +25,7 @@ abstract class AppRouter {
   static const String kLanguageScreen = '/languageScreen';
   static const String kThemeScreen = '/themeScreen';
   static final router = GoRouter(
-    observers: [],
+    observers: [routeObserver],
     routes: [
       GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
       GoRoute(
@@ -78,3 +79,27 @@ abstract class AppRouter {
     ],
   );
 }
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
+// class GoRouterObserver extends NavigatorObserver {
+//   @override
+//   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didPush: $route');
+//   }
+
+//   @override
+//   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didPop: $route');
+//   }
+
+//   @override
+//   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didRemove: $route');
+//   }
+
+//   @override
+//   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+//     log('MyTest didReplace: $newRoute');
+//   }
+// }

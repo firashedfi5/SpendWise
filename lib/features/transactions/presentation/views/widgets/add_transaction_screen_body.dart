@@ -1,11 +1,47 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/add_transactions_buttons.dart';
 
-class AddTransactionScreenBody extends StatelessWidget {
+class AddTransactionScreenBody extends StatefulWidget {
   const AddTransactionScreenBody({super.key});
+
+  @override
+  State<AddTransactionScreenBody> createState() =>
+      _AddTransactionScreenBodyState();
+}
+
+class _AddTransactionScreenBodyState extends State<AddTransactionScreenBody>
+    with RouteAware {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    //* Subscribe to RouteObserver
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) {
+      routeObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void dispose() {
+    //* Unsubscribe from RouteObserver
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    //* Refresh the transactions list when returning to this screen
+    context.read<HomeCubit>().getTransactions();
+    log('AddTransactionScreen', name: 'Refreshing');
+  }
 
   @override
   Widget build(BuildContext context) {
