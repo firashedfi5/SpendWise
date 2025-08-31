@@ -15,8 +15,6 @@ class FetchTransactionsCubit extends Cubit<FetchTransactionsState> {
 
   final HomeRepo _homeRepo;
 
-  List<TransactionModel> transactionsList = [];
-
   Future<void> fetchTransactions() async {
     emit(FetchTransactionsLoading());
     // await Future.delayed(const Duration(seconds: 5));
@@ -26,8 +24,7 @@ class FetchTransactionsCubit extends Cubit<FetchTransactionsState> {
     result.fold(
       (failure) => emit(FetchTransactionsFailure(errMessage: failure.message)),
       (transactions) {
-        transactionsList = transactions;
-        emit(FetchTransactionsSuccess());
+        emit(FetchTransactionsSuccess(transactions: transactions));
       },
     );
   }

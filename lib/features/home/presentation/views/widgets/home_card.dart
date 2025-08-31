@@ -4,7 +4,6 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/functions/card_gradient.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
-import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class HomeCard extends StatelessWidget {
   const HomeCard({super.key});
@@ -16,13 +15,11 @@ class HomeCard extends StatelessWidget {
       sliver: SliverToBoxAdapter(
         child: BlocBuilder<FetchTransactionsCubit, FetchTransactionsState>(
           builder: (context, state) {
-            List<TransactionModel> transactions = context
-                .read<FetchTransactionsCubit>()
-                .transactionsList;
             double totalBalance = 0;
             double totalIncome = 0;
             double totalExpenses = 0;
             if (state is FetchTransactionsSuccess) {
+              final transactions = state.transactions;
               totalBalance = context
                   .read<FetchTransactionsCubit>()
                   .getTotalBalance(transactions: transactions);

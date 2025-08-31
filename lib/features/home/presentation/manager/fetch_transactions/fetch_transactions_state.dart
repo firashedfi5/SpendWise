@@ -11,7 +11,11 @@ final class FetchTransactionsInitial extends FetchTransactionsState {}
 
 final class FetchTransactionsLoading extends FetchTransactionsState {}
 
-final class FetchTransactionsSuccess extends FetchTransactionsState {}
+final class FetchTransactionsSuccess extends FetchTransactionsState {
+  final List<TransactionModel> transactions;
+
+  const FetchTransactionsSuccess({required this.transactions});
+}
 
 final class FetchTransactionsFailure extends FetchTransactionsState {
   final String errMessage;
