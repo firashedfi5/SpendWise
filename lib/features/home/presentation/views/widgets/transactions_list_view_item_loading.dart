@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/functions/date_formating.dart';
 import 'package:spendwise/core/utils/styles.dart';
-import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class TransactionsListViewItemLoading extends StatelessWidget {
@@ -20,7 +20,7 @@ class TransactionsListViewItemLoading extends StatelessWidget {
         child: Row(
           children: [
             Center(
-              child: context.read<HomeCubit>().getCategoryIcon(
+              child: context.read<FetchTransactionsCubit>().getCategoryIcon(
                 type: transaction.type!,
                 fetchedCategory: transaction.category!,
               ),

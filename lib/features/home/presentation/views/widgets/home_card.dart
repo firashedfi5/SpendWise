@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/functions/card_gradient.dart';
 import 'package:spendwise/core/utils/styles.dart';
-import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class HomeCard extends StatelessWidget {
@@ -14,24 +14,24 @@ class HomeCard extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
       sliver: SliverToBoxAdapter(
-        child: BlocBuilder<HomeCubit, HomeState>(
+        child: BlocBuilder<FetchTransactionsCubit, FetchTransactionsState>(
           builder: (context, state) {
             List<TransactionModel> transactions = context
-                .read<HomeCubit>()
+                .read<FetchTransactionsCubit>()
                 .transactionsList;
             double totalBalance = 0;
             double totalIncome = 0;
             double totalExpenses = 0;
-            if (state is HomeSuccess) {
-              totalBalance = context.read<HomeCubit>().getTotalBalance(
-                transactions: transactions,
-              );
-              totalIncome = context.read<HomeCubit>().getTotalIncome(
-                transactions: transactions,
-              );
-              totalExpenses = context.read<HomeCubit>().getTotalExpenses(
-                transactions: transactions,
-              );
+            if (state is FetchTransactionsSuccess) {
+              totalBalance = context
+                  .read<FetchTransactionsCubit>()
+                  .getTotalBalance(transactions: transactions);
+              totalIncome = context
+                  .read<FetchTransactionsCubit>()
+                  .getTotalIncome(transactions: transactions);
+              totalExpenses = context
+                  .read<FetchTransactionsCubit>()
+                  .getTotalExpenses(transactions: transactions);
             }
             return Card(
               elevation: 5,

@@ -8,27 +8,28 @@ import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/home/data/repos/home_repo.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
-part 'home_state.dart';
+part 'fetch_transactions_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._homeRepo) : super(HomeInitial());
+class FetchTransactionsCubit extends Cubit<FetchTransactionsState> {
+  FetchTransactionsCubit(this._homeRepo) : super(FetchTransactionsInitial());
 
   final HomeRepo _homeRepo;
 
   List<TransactionModel> transactionsList = [];
 
-  Future<void> getTransactions() async {
-    emit(HomeLoading());
+  Future<void> fetchTransactions() async {
+    emit(FetchTransactionsLoading());
     // await Future.delayed(const Duration(seconds: 5));
     final result = await _homeRepo.getTransactions(
       userId: getIt.get<FirebaseAuth>().currentUser!.uid,
     );
-    result.fold((failure) => emit(HomeFailure(errMessage: failure.message)), (
-      transactions,
-    ) {
-      transactionsList = transactions;
-      emit(HomeSuccess());
-    });
+    result.fold(
+      (failure) => emit(FetchTransactionsFailure(errMessage: failure.message)),
+      (transactions) {
+        transactionsList = transactions;
+        emit(FetchTransactionsSuccess());
+      },
+    );
   }
 
   Widget getCategoryIcon({
@@ -86,14 +87,5 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
     return totalExpenses;
-  }
-
-  Future<void> deleteTransaction({required int id}) async {
-    emit(DeletingLoading());
-    final result = await _homeRepo.deleteTransaction(id: id);
-    result.fold(
-      (l) => emit(DeletingFailure(errMessage: l.message)),
-      (r) => emit(HomeSuccess()),
-    );
   }
 }

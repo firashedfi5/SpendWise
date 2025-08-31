@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
-import 'package:spendwise/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:spendwise/features/home/presentation/manager/delete_transaction/delete_transaction_cubit.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_item.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_loading.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
@@ -16,27 +17,21 @@ class TransactionsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: kPadding24),
-      sliver: BlocConsumer<HomeCubit, HomeState>(
-        listener: (BuildContext context, HomeState state) {
-          if (state is HomeFailure) {
+      sliver: BlocConsumer<FetchTransactionsCubit, FetchTransactionsState>(
+        listener: (BuildContext context, FetchTransactionsState state) {
+          if (state is FetchTransactionsFailure) {
             customSnackBar(
               context: context,
               message: state.errMessage,
               success: false,
             );
-          } else if (state is DeletingSuccess) {
-            customSnackBar(
-              context: context,
-              message: 'Transaction deleted successfully!',
-              success: true,
-            );
           }
         },
         builder: (context, state) {
           List<TransactionModel> transactions = context
-              .read<HomeCubit>()
+              .read<FetchTransactionsCubit>()
               .transactionsList;
-          if (state is HomeSuccess) {
+          if (state is FetchTransactionsSuccess) {
             if (transactions.isEmpty) {
               return const SliverToBoxAdapter(
                 child: Column(
@@ -64,12 +59,14 @@ class TransactionsListView extends StatelessWidget {
                   ),
                   direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
-                    context.read<HomeCubit>().deleteTransaction(
+                    context.read<DeleteTransactionCubit>().deleteTransaction(
                       id: transactions[index].id!,
                     );
-                    context.read<HomeCubit>().transactionsList.remove(
-                      transactions[index],
-                    );
+                    context
+                        .read<FetchTransactionsCubit>()
+                        .transactionsList
+                        .remove(transactions[index]);
+                    context.read<FetchTransactionsCubit>().fetchTransactions();
                   },
                   child: GestureDetector(
                     onTap: () => transactions[index].type == 'Income'
@@ -88,7 +85,7 @@ class TransactionsListView extends StatelessWidget {
                 );
               }, childCount: transactions.length),
             );
-          } else if (state is HomeFailure) {
+          } else if (state is FetchTransactionsFailure) {
             return const SliverToBoxAdapter(
               child: Column(
                 children: [
@@ -98,7 +95,7 @@ class TransactionsListView extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is HomeLoading) {
+          } else if (state is FetchTransactionsLoading) {
             return const TransactionsListViewLoading();
           }
           return const SliverToBoxAdapter(child: SizedBox());
