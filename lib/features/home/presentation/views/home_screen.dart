@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
@@ -12,8 +11,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())
-        ..getTransactions(userId: getIt.get<FirebaseAuth>().currentUser!.uid),
+      create: (context) =>
+          HomeCubit(getIt.get<HomeRepoImpl>())..getTransactions(),
       child: const Scaffold(body: SafeArea(child: HomeScreenBody())),
     );
   }
