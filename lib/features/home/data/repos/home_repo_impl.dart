@@ -27,7 +27,7 @@ class HomeRepoImpl implements HomeRepo {
   // }
 
   @override
-  Future<Either<Failure, List<TransactionModel>>> getTransactions({
+  Future<Either<Failure, List<TransactionModel>>> fetchTransactions({
     required String userId,
   }) async {
     try {

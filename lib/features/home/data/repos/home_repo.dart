@@ -5,7 +5,7 @@ import 'package:spendwise/features/transactions/data/models/transaction_model.da
 abstract class HomeRepo {
   // Future<Either<Failure, UserModel>> getUser({required String userId});
 
-  Future<Either<Failure, List<TransactionModel>>> getTransactions({
+  Future<Either<Failure, List<TransactionModel>>> fetchTransactions({
     required String userId,
   });
 

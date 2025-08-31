@@ -18,7 +18,7 @@ class FetchTransactionsCubit extends Cubit<FetchTransactionsState> {
   Future<void> fetchTransactions() async {
     emit(FetchTransactionsLoading());
     // await Future.delayed(const Duration(seconds: 5));
-    final result = await _homeRepo.getTransactions(
+    final result = await _homeRepo.fetchTransactions(
       userId: getIt.get<FirebaseAuth>().currentUser!.uid,
     );
     result.fold(
