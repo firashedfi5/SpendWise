@@ -7,6 +7,7 @@ import 'package:spendwise/features/settings/presentation/views/account_info_scre
 import 'package:spendwise/features/settings/presentation/views/language_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/settings_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/theme_screen.dart';
+import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_expense_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_income_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_transaction_screen.dart';
@@ -23,6 +24,7 @@ abstract class AppRouter {
   static const String kLanguageScreen = '/languageScreen';
   static const String kThemeScreen = '/themeScreen';
   static final router = GoRouter(
+    observers: [],
     routes: [
       GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
       GoRoute(
@@ -43,11 +45,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddIncomeScreen,
-        builder: (context, state) => const AddIncomeScreen(),
+        builder: (context, state) {
+          final TransactionModel? transaction =
+              state.extra as TransactionModel?;
+          return AddIncomeScreen(transaction: transaction);
+        },
       ),
       GoRoute(
         path: kAddExpenseScreen,
-        builder: (context, state) => const AddExpenseScreen(),
+        builder: (context, state) {
+          final TransactionModel? transaction =
+              state.extra as TransactionModel?;
+          return AddExpenseScreen(transaction: transaction);
+        },
       ),
       GoRoute(
         path: kSettingsScreen,

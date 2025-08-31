@@ -14,7 +14,9 @@ import 'package:spendwise/features/transactions/presentation/views/widgets/choos
 import 'package:spendwise/features/transactions/presentation/views/widgets/select_category.dart';
 
 class AddIncomeScreenBody extends StatefulWidget {
-  const AddIncomeScreenBody({super.key});
+  const AddIncomeScreenBody({super.key, this.transaction});
+
+  final TransactionModel? transaction;
 
   @override
   State<AddIncomeScreenBody> createState() => _AddIncomeScreenBodyState();
@@ -64,7 +66,9 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                 CustomElevatedButton(
                   backgroundColor: kPrimaryColor,
                   foregroundColor: Colors.white,
-                  label: 'Add Income',
+                  label: widget.transaction == null
+                      ? 'Add Income'
+                      : 'Update Income',
                   onPressed: () async {
                     await context.read<TransactionsCubit>().addTransaction(
                       transaction: TransactionModel(

@@ -12,39 +12,45 @@ class TransactionsListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-      child: Row(
-        children: [
-          Center(
-            child: context.read<HomeCubit>().getCategoryIcon(
-              type: transaction.type!,
-              fetchedCategory: transaction.category!,
-            ),
-          ),
-          const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(transaction.title ?? '', style: Styles.textStyle18),
-              const SizedBox(height: 4),
-              Text(
-                formatDate(transaction.date!),
-                style: const TextStyle(color: Colors.blueGrey),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 5),
+      decoration: const BoxDecoration(color: Colors.transparent),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+        child: Row(
+          children: [
+            Center(
+              child: context.read<HomeCubit>().getCategoryIcon(
+                type: transaction.type!,
+                fetchedCategory: transaction.category!,
               ),
-            ],
-          ),
-          const Spacer(),
-          Text(
-            transaction.type! == 'Income'
-                ? '+\$${transaction.amount.toString()}'
-                : '-\$${transaction.amount.toString()}',
-            style: Styles.textStyle14.copyWith(
-              color: transaction.type! == 'Income' ? Colors.green : Colors.red,
-              fontWeight: FontWeight.bold,
             ),
-          ),
-        ],
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(transaction.title ?? '', style: Styles.textStyle18),
+                const SizedBox(height: 4),
+                Text(
+                  formatDate(transaction.date!),
+                  style: const TextStyle(color: Colors.blueGrey),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Text(
+              transaction.type! == 'Income'
+                  ? '+\$${transaction.amount.toString()}'
+                  : '-\$${transaction.amount.toString()}',
+              style: Styles.textStyle14.copyWith(
+                color: transaction.type! == 'Income'
+                    ? Colors.green
+                    : Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
