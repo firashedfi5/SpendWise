@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/styles.dart';
-import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_update_transaction/add_update_transaction_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/category_selector.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -18,18 +18,20 @@ class SelectCategory extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           children: [
-            BlocBuilder<TransactionsCubit, TransactionsState>(
+            BlocBuilder<AddUpdateTransactionCubit, AddUpdateTransactionState>(
               builder: (context, state) {
                 String? category;
                 if (state is CategoryUpdated) {
                   category = state.category;
+                } else if (state is UpdateTransactionInitial) {
+                  category = state.transaction.category;
                 }
                 return Chip(label: Text(category ?? 'Select category'));
               },
             ),
             IconButton(
               onPressed: () async {
-                final cubit = context.read<TransactionsCubit>();
+                final cubit = context.read<AddUpdateTransactionCubit>();
 
                 await showModalBottomSheet(
                   isScrollControlled: true,

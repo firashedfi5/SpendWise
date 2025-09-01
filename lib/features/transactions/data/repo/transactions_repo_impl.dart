@@ -27,4 +27,22 @@ class TransactionsRepoImpl implements TransactionsRepo {
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> updateTransaction({
+    required TransactionModel transaction,
+  }) async {
+    try {
+      await _apiService.put(
+        endPoint: '/Transactions/${transaction.id}',
+        data: transaction.toJson(),
+      );
+      return right(unit);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
 }
