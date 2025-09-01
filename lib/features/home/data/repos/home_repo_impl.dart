@@ -30,11 +30,11 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<TransactionModel>>> fetchTransactions({
     required String userId,
   }) async {
+    List<TransactionModel> transactions = [];
     try {
       final data = await _apiService.get(
         endPoint: '/Transactions/${getIt.get<FirebaseAuth>().currentUser!.uid}',
       );
-      List<TransactionModel> transactions = [];
       for (var item in data['data']) {
         transactions.add(TransactionModel.fromJson(item));
       }
