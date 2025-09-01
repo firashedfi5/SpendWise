@@ -33,7 +33,10 @@ class TransactionsRepoImpl implements TransactionsRepo {
     required TransactionModel transaction,
   }) async {
     try {
-      await _apiService.put(endPoint: 'Transaction/${transaction.id}');
+      await _apiService.put(
+        endPoint: '/Transactions/${transaction.id}',
+        data: transaction.toJson(),
+      );
       return right(unit);
     } catch (e) {
       if (e is DioException) {

@@ -32,12 +32,12 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
     if (widget.transaction != null) {
       titleController.text = widget.transaction!.title!;
       amountController.text = widget.transaction!.amount!.toString();
-    }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final cubit = BlocProvider.of<AddUpdateTransactionCubit>(context);
-      cubit.initializeWithTask(widget.transaction!);
-    });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final cubit = BlocProvider.of<AddUpdateTransactionCubit>(context);
+        cubit.initializeWithTask(widget.transaction!);
+      });
+    }
   }
 
   @override
@@ -54,6 +54,18 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
           customSnackBar(
             context: context,
             message: 'Transaction added successfully',
+            success: true,
+          );
+        } else if (state is UpdateTransactionFailure) {
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
+        } else if (state is UpdateTransactionSuccess) {
+          customSnackBar(
+            context: context,
+            message: 'Transaction updated successfully',
             success: true,
           );
         }
@@ -84,23 +96,48 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                       ? 'Add Income'
                       : 'Update Income',
                   onPressed: () async {
-                    await context
-                        .read<AddUpdateTransactionCubit>()
-                        .addTransaction(
-                          transaction: TransactionModel(
-                            id: 0,
-                            userId: getIt.get<FirebaseAuth>().currentUser!.uid,
-                            type: 'Income',
-                            title: titleController.text,
-                            amount: double.parse(amountController.text),
-                            category: context
-                                .read<AddUpdateTransactionCubit>()
-                                .category,
-                            date: context
-                                .read<AddUpdateTransactionCubit>()
-                                .date,
-                          ),
-                        );
+                    if (widget.transaction == null) {
+                      await context
+                          .read<AddUpdateTransactionCubit>()
+                          .addTransaction(
+                            transaction: TransactionModel(
+                              id: 0,
+                              userId: getIt
+                                  .get<FirebaseAuth>()
+                                  .currentUser!
+                                  .uid,
+                              type: 'Income',
+                              title: titleController.text,
+                              amount: double.parse(amountController.text),
+                              category: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .category,
+                              date: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .date,
+                            ),
+                          );
+                    } else {
+                      await context
+                          .read<AddUpdateTransactionCubit>()
+                          .updateTransaction(
+                            transaction: TransactionModel(
+                              id: context.read<AddUpdateTransactionCubit>().id,
+                              userId: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .userId,
+                              type: 'Income',
+                              title: titleController.text,
+                              amount: double.parse(amountController.text),
+                              category: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .category,
+                              date: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .date,
+                            ),
+                          );
+                    }
                     if (context.mounted) context.pop();
                   },
                 ),

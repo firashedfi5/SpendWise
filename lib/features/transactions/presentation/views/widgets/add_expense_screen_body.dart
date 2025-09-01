@@ -32,12 +32,12 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
     if (widget.transaction != null) {
       titleController.text = widget.transaction!.title!;
       amountController.text = widget.transaction!.amount!.toString();
-    }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final cubit = BlocProvider.of<AddUpdateTransactionCubit>(context);
-      cubit.initializeWithTask(widget.transaction!);
-    });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final cubit = BlocProvider.of<AddUpdateTransactionCubit>(context);
+        cubit.initializeWithTask(widget.transaction!);
+      });
+    }
   }
 
   @override
@@ -84,23 +84,48 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                       ? 'Add Expense'
                       : 'Update Expense',
                   onPressed: () async {
-                    await context
-                        .read<AddUpdateTransactionCubit>()
-                        .addTransaction(
-                          transaction: TransactionModel(
-                            id: 0,
-                            userId: getIt.get<FirebaseAuth>().currentUser!.uid,
-                            type: 'Expense',
-                            title: titleController.text,
-                            amount: double.parse(amountController.text),
-                            category: context
-                                .read<AddUpdateTransactionCubit>()
-                                .category,
-                            date: context
-                                .read<AddUpdateTransactionCubit>()
-                                .date,
-                          ),
-                        );
+                    if (widget.transaction == null) {
+                      await context
+                          .read<AddUpdateTransactionCubit>()
+                          .addTransaction(
+                            transaction: TransactionModel(
+                              id: 0,
+                              userId: getIt
+                                  .get<FirebaseAuth>()
+                                  .currentUser!
+                                  .uid,
+                              type: 'Expense',
+                              title: titleController.text,
+                              amount: double.parse(amountController.text),
+                              category: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .category,
+                              date: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .date,
+                            ),
+                          );
+                    } else {
+                      await context
+                          .read<AddUpdateTransactionCubit>()
+                          .updateTransaction(
+                            transaction: TransactionModel(
+                              id: context.read<AddUpdateTransactionCubit>().id,
+                              userId: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .userId,
+                              type: 'Expense',
+                              title: titleController.text,
+                              amount: double.parse(amountController.text),
+                              category: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .category,
+                              date: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .date,
+                            ),
+                          );
+                    }
                     if (context.mounted) context.pop();
                   },
                 ),

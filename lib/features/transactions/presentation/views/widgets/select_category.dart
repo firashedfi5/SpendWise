@@ -23,6 +23,8 @@ class SelectCategory extends StatelessWidget {
                 String? category;
                 if (state is CategoryUpdated) {
                   category = state.category;
+                } else if (state is UpdateTransactionInitial) {
+                  category = state.transaction.category;
                 }
                 return Chip(label: Text(category ?? 'Select category'));
               },

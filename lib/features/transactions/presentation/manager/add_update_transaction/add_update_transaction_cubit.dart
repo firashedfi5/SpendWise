@@ -20,6 +20,7 @@ class AddUpdateTransactionCubit extends Cubit<AddUpdateTransactionState> {
     id = transaction.id!;
     userId = transaction.userId!;
     date = transaction.date!;
+    category = transaction.category!;
 
     emit(UpdateTransactionInitial(transaction: transaction));
   }
