@@ -8,7 +8,7 @@ import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
-import 'package:spendwise/features/transactions/presentation/manager/add_transaction/add_transaction_cubit.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_update_transaction/add_update_transaction_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/amount_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/choose_date.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/select_category.dart';
@@ -27,8 +27,22 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
   final TextEditingController amountController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.transaction != null) {
+      titleController.text = widget.transaction!.title!;
+      amountController.text = widget.transaction!.amount!.toString();
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cubit = BlocProvider.of<AddUpdateTransactionCubit>(context);
+      cubit.initializeWithTask(widget.transaction!);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocListener<AddTransactionCubit, AddTransactionState>(
+    return BlocListener<AddUpdateTransactionCubit, AddUpdateTransactionState>(
       listener: (context, state) {
         if (state is AddTransactionFailure) {
           customSnackBar(
@@ -70,17 +84,23 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                       ? 'Add Expense'
                       : 'Update Expense',
                   onPressed: () async {
-                    await context.read<AddTransactionCubit>().addTransaction(
-                      transaction: TransactionModel(
-                        id: 0,
-                        userId: getIt.get<FirebaseAuth>().currentUser!.uid,
-                        type: 'Expense',
-                        title: titleController.text,
-                        amount: double.parse(amountController.text),
-                        category: context.read<AddTransactionCubit>().category,
-                        date: context.read<AddTransactionCubit>().date,
-                      ),
-                    );
+                    await context
+                        .read<AddUpdateTransactionCubit>()
+                        .addTransaction(
+                          transaction: TransactionModel(
+                            id: 0,
+                            userId: getIt.get<FirebaseAuth>().currentUser!.uid,
+                            type: 'Expense',
+                            title: titleController.text,
+                            amount: double.parse(amountController.text),
+                            category: context
+                                .read<AddUpdateTransactionCubit>()
+                                .category,
+                            date: context
+                                .read<AddUpdateTransactionCubit>()
+                                .date,
+                          ),
+                        );
                     if (context.mounted) context.pop();
                   },
                 ),

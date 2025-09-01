@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 import 'package:spendwise/features/transactions/data/repo/transactions_repo_impl.dart';
-import 'package:spendwise/features/transactions/presentation/manager/add_transaction/add_transaction_cubit.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_update_transaction/add_update_transaction_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/add_income_screen_body.dart';
 
 class AddIncomeScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class AddIncomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          AddTransactionCubit(getIt.get<TransactionsRepoImpl>()),
+          AddUpdateTransactionCubit(getIt.get<TransactionsRepoImpl>()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(transaction == null ? 'Add Income' : 'Update Income'),
