@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/functions/date_formating.dart';
 import 'package:spendwise/core/utils/styles.dart';
-import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
-class TransactionsListViewItem extends StatelessWidget {
-  const TransactionsListViewItem({super.key, required this.transaction});
+class TransactionsListViewItemLoading extends StatelessWidget {
+  const TransactionsListViewItemLoading({super.key, required this.transaction});
 
   final TransactionModel transaction;
 
@@ -19,12 +17,7 @@ class TransactionsListViewItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         child: Row(
           children: [
-            Center(
-              child: context.read<FetchTransactionsCubit>().getCategoryIcon(
-                type: transaction.type!,
-                fetchedCategory: transaction.category!,
-              ),
-            ),
+            const Center(child: Icon(Icons.abc)),
             const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

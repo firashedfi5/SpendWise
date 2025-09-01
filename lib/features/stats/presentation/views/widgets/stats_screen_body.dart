@@ -19,7 +19,7 @@ class StatsScreenBody extends StatelessWidget {
         IncomeOutcomeHeader(),
         StatsContainer(),
         CustomSegmentedButton(),
-        TransactionsListView(childCount: 4),
+        TransactionsListView(),
       ],
     );
   }

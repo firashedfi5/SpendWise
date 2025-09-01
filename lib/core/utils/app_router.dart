@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/features/auth/presentation/views/forgot_passwrod_screen.dart';
 import 'package:spendwise/features/auth/presentation/views/login_screen.dart';
@@ -7,6 +8,7 @@ import 'package:spendwise/features/settings/presentation/views/account_info_scre
 import 'package:spendwise/features/settings/presentation/views/language_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/settings_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/theme_screen.dart';
+import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_expense_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_income_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_transaction_screen.dart';
@@ -23,6 +25,7 @@ abstract class AppRouter {
   static const String kLanguageScreen = '/languageScreen';
   static const String kThemeScreen = '/themeScreen';
   static final router = GoRouter(
+    observers: [routeObserver],
     routes: [
       GoRoute(path: '/', builder: (context, state) => const LoginScreen()),
       GoRoute(
@@ -43,11 +46,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddIncomeScreen,
-        builder: (context, state) => const AddIncomeScreen(),
+        builder: (context, state) {
+          final TransactionModel? transaction =
+              state.extra as TransactionModel?;
+          return AddIncomeScreen(transaction: transaction);
+        },
       ),
       GoRoute(
         path: kAddExpenseScreen,
-        builder: (context, state) => const AddExpenseScreen(),
+        builder: (context, state) {
+          final TransactionModel? transaction =
+              state.extra as TransactionModel?;
+          return AddExpenseScreen(transaction: transaction);
+        },
       ),
       GoRoute(
         path: kSettingsScreen,
@@ -68,3 +79,27 @@ abstract class AppRouter {
     ],
   );
 }
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
+// class GoRouterObserver extends NavigatorObserver {
+//   @override
+//   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didPush: $route');
+//   }
+
+//   @override
+//   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didPop: $route');
+//   }
+
+//   @override
+//   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+//     log('MyTest didRemove: $route');
+//   }
+
+//   @override
+//   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+//     log('MyTest didReplace: $newRoute');
+//   }
+// }
