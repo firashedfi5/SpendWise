@@ -6,4 +6,8 @@ abstract class TransactionsRepo {
   Future<Either<Failure, Unit>> addTransaction({
     required TransactionModel transaction,
   });
+
+  Future<Either<Failure, Unit>> updateTransaction({
+    required TransactionModel transaction,
+  });
 }
