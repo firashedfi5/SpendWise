@@ -17,7 +17,7 @@ void main() async {
   setup();
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionModelAdapter());
-  await Hive.openBox(kTransactionsBox);
+  await Hive.openBox<TransactionModel>(kTransactionsBox);
   runApp(const SpendWise());
 }
 
