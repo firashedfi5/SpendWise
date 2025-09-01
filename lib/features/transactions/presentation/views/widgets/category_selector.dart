@@ -4,7 +4,7 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/enums/expense_categories.dart';
 import 'package:spendwise/core/enums/income_categories.dart';
 import 'package:spendwise/core/utils/styles.dart';
-import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_transaction/add_transaction_cubit.dart';
 
 class CategorySelector extends StatelessWidget {
   const CategorySelector({super.key, required this.isIncome});
@@ -51,7 +51,7 @@ class CategorySelector extends StatelessWidget {
                               ? incomeCategory.name
                               : expenseCategory.name;
 
-                          context.read<TransactionsCubit>().setCategory(
+                          context.read<AddTransactionCubit>().setCategory(
                             selectedCategory,
                           );
                           Navigator.of(context).pop();

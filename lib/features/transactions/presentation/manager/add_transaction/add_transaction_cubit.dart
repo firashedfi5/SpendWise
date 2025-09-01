@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 import 'package:spendwise/features/transactions/data/repo/transactions_repo.dart';
 
-part 'transactions_state.dart';
+part 'add_transaction_state.dart';
 
-class TransactionsCubit extends Cubit<TransactionsState> {
-  TransactionsCubit(this._transactionsRepo) : super(TransactionsInitial());
+class AddTransactionCubit extends Cubit<AddTransactionState> {
+  AddTransactionCubit(this._transactionsRepo) : super(AddTransactionInitial());
 
   final TransactionsRepo _transactionsRepo;
 
@@ -19,13 +19,13 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   }
 
   Future<void> addTransaction({required TransactionModel transaction}) async {
-    emit(TransactionsLoading());
+    emit(AddTransactionLoading());
     final result = await _transactionsRepo.addTransaction(
       transaction: transaction,
     );
     result.fold(
-      (failure) => emit(TransactionsFailure(errMessage: failure.message)),
-      (success) => emit(TransactionsSuccess()),
+      (failure) => emit(AddTransactionFailure(errMessage: failure.message)),
+      (success) => emit(AddTransactionSuccess()),
     );
   }
 }

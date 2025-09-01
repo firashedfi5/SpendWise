@@ -8,7 +8,7 @@ import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
 import 'package:spendwise/core/widgets/custom_text_form_field.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
-import 'package:spendwise/features/transactions/presentation/manager/cubit/transactions_cubit.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_transaction/add_transaction_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/amount_text_form_field.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/choose_date.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/select_category.dart';
@@ -28,15 +28,15 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<TransactionsCubit, TransactionsState>(
+    return BlocListener<AddTransactionCubit, AddTransactionState>(
       listener: (context, state) {
-        if (state is TransactionsFailure) {
+        if (state is AddTransactionFailure) {
           customSnackBar(
             context: context,
             message: state.errMessage,
             success: false,
           );
-        } else if (state is TransactionsSuccess) {
+        } else if (state is AddTransactionSuccess) {
           customSnackBar(
             context: context,
             message: 'Transaction added successfully',
@@ -70,15 +70,15 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                       ? 'Add Expense'
                       : 'Update Expense',
                   onPressed: () async {
-                    await context.read<TransactionsCubit>().addTransaction(
+                    await context.read<AddTransactionCubit>().addTransaction(
                       transaction: TransactionModel(
                         id: 0,
                         userId: getIt.get<FirebaseAuth>().currentUser!.uid,
                         type: 'Expense',
                         title: titleController.text,
                         amount: double.parse(amountController.text),
-                        category: context.read<TransactionsCubit>().category,
-                        date: context.read<TransactionsCubit>().date,
+                        category: context.read<AddTransactionCubit>().category,
+                        date: context.read<AddTransactionCubit>().date,
                       ),
                     );
                     if (context.mounted) context.pop();
