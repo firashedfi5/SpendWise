@@ -1,12 +1,29 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'transaction_model.g.dart';
+
+@HiveType(typeId: 0)
 class TransactionModel extends Equatable {
+  @HiveField(0)
   final int? id;
+
+  @HiveField(1)
   final String? userId;
+
+  @HiveField(2)
   final String? type;
+
+  @HiveField(3)
   final String? title;
+
+  @HiveField(4)
   final double? amount;
+
+  @HiveField(5)
   final String? category;
+
+  @HiveField(6)
   final DateTime? date;
 
   const TransactionModel({

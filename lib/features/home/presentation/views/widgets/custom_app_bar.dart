@@ -34,7 +34,11 @@ class CustomAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => context.push(AppRouter.kSettingsScreen),
+          onPressed: () async {
+            context.push(AppRouter.kSettingsScreen);
+            // var box = Hive.box<TransactionModel>(kTransactionsBox);
+            // await box.clear();
+          },
           icon: const Icon(Icons.settings),
         ),
       ],
