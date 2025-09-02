@@ -53,11 +53,11 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, Unit>> deleteTransaction({required int id}) async {
     try {
-      //* Delete transaction remotely
-      await _homeRemoteDataSource.deleteTransaction(id: id);
-
       //* Delete transaction locally
       await _homeLocalDataSource.deleteTransaction(id: id);
+
+      //* Delete transaction remotely
+      await _homeRemoteDataSource.deleteTransaction(id: id);
 
       return right(unit);
     } catch (e) {

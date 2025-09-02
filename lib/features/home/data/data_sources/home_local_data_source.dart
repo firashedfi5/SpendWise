@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/functions/delete_data_locally.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 abstract class HomeLocalDataSource {
@@ -15,11 +17,16 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   List<TransactionModel> fetchTransactions() {
     var box = Hive.box<TransactionModel>(kTransactionsBox);
 
-    log(box.values.length.toString());
-
     log('Transaction fetched locally successfully!', name: 'Fetching');
 
-    return box.values.toList();
+    List<TransactionModel> transactions = box.values.toList();
+
+    return transactions
+        .where(
+          (element) =>
+              element.userId == getIt.get<FirebaseAuth>().currentUser!.uid,
+        )
+        .toList();
   }
 
   @override
