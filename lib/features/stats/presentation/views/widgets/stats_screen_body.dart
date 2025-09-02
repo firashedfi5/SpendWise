@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_bloc_builder.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/custom_segmented_buttons.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/income_outcome_header.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/stats_container.dart';
@@ -19,7 +19,7 @@ class StatsScreenBody extends StatelessWidget {
         IncomeOutcomeHeader(),
         StatsContainer(),
         CustomSegmentedButton(),
-        TransactionsListView(),
+        TransactionListViewBlocBuilder(),
       ],
     );
   }

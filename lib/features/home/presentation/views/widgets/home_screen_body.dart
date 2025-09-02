@@ -7,7 +7,7 @@ import 'package:spendwise/features/home/presentation/manager/fetch_transactions/
 import 'package:spendwise/features/home/presentation/views/widgets/custom_app_bar.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/home_card.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_header.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_bloc_builder.dart';
 
 class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({super.key});
@@ -48,7 +48,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> with RouteAware {
         CustomAppBar(),
         HomeCard(),
         TransactionsHeader(),
-        TransactionsListView(),
+        TransactionListViewBlocBuilder(),
       ],
     );
   }

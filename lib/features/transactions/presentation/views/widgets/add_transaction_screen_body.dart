@@ -6,7 +6,7 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
+import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_bloc_builder.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/add_transactions_buttons.dart';
 
 class AddTransactionScreenBody extends StatefulWidget {
@@ -55,7 +55,7 @@ class _AddTransactionScreenBodyState extends State<AddTransactionScreenBody>
             child: Text('Last Added', style: Styles.textStyle18),
           ),
         ),
-        TransactionsListView(),
+        TransactionListViewBlocBuilder(),
       ],
     );
   }
