@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/api_service.dart';
@@ -7,6 +9,7 @@ import 'package:spendwise/features/transactions/data/models/transaction_model.da
 
 abstract class HomeRemoteDataSource {
   Future<List<TransactionModel>> fetchTransactions();
+  Future<void> deleteTransaction({required int id});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -23,8 +26,16 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       transactions.add(TransactionModel.fromJson(item));
     }
 
+    log('Transaction fetched remotely successfully!', name: 'Fetching');
+
     saveDataLocally(transactions, kTransactionsBox);
 
     return transactions;
+  }
+
+  @override
+  Future<void> deleteTransaction({required int id}) async {
+    await _apiService.delete(endPoint: '/Transactions/$id');
+    log('Transaction deleted remotely successfully!', name: 'Deleting');
   }
 }
