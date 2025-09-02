@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:spendwise/core/constants.dart';
@@ -17,7 +15,7 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   List<TransactionModel> fetchTransactions() {
     var box = Hive.box<TransactionModel>(kTransactionsBox);
 
-    log('Transaction fetched locally successfully!', name: 'Fetching');
+    // log('Transaction fetched locally successfully!', name: 'Fetching');
 
     List<TransactionModel> transactions = box.values.toList();
 
@@ -32,6 +30,6 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   @override
   Future<void> deleteTransaction({required int id}) async {
     await deleteDataLocally(id, kTransactionsBox);
-    log('Transaction deleted locally successfully!', name: 'Deleting');
+    // log('Transaction deleted locally successfully!', name: 'Deleting');
   }
 }

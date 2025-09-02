@@ -26,7 +26,6 @@ class HomeRepoImpl implements HomeRepo {
   //   }
   // }
 
-  //TODO: Data yet3malelha fetch ken mel local data source, ya3ni ayy transaction tetzed jdida maysirelhech fetch and cache locally
   @override
   Future<Either<Failure, List<TransactionModel>>> fetchTransactions({
     required String userId,
@@ -53,10 +52,10 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, Unit>> deleteTransaction({required int id}) async {
     try {
-      //* Delete transaction locally
+      //* Delete data locally
       await _homeLocalDataSource.deleteTransaction(id: id);
 
-      //* Delete transaction remotely
+      //* Delete data remotely
       await _homeRemoteDataSource.deleteTransaction(id: id);
 
       return right(unit);

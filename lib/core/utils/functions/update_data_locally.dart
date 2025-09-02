@@ -1,12 +1,13 @@
 import 'package:hive/hive.dart';
+import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
-Future<void> deleteDataLocally(int id, String boxName) async {
-  var box = Hive.box<TransactionModel>(boxName);
+Future<void> updateDataLocally(TransactionModel transaction) async {
+  var box = Hive.box<TransactionModel>(kTransactionsBox);
   final List<TransactionModel> transactionsList = box.values.toList();
   for (int i = 0; i < transactionsList.length; i++) {
-    if (transactionsList[i].id == id) {
-      await box.deleteAt(i);
+    if (transactionsList[i].id == transaction.id) {
+      await box.putAt(i, transaction);
       break;
     }
   }

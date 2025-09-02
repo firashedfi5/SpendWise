@@ -28,7 +28,6 @@ void setup() {
   );
   getIt.registerSingleton<TransactionsRepoImpl>(
     TransactionsRepoImpl(
-      getIt.get<ApiService>(),
       TransactionsRemoteDataSourceImpl(getIt.get<ApiService>()),
       TransactionsLocalDataSourceImpl(),
     ),

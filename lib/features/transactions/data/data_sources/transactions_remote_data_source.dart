@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:spendwise/core/utils/api_service.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
@@ -7,6 +5,7 @@ abstract class TransactionsRemoteDataSource {
   Future<TransactionModel> addTransaction({
     required TransactionModel transaction,
   });
+  Future<void> updateTransaction({required TransactionModel transaction});
 }
 
 class TransactionsRemoteDataSourceImpl implements TransactionsRemoteDataSource {
@@ -22,7 +21,18 @@ class TransactionsRemoteDataSourceImpl implements TransactionsRemoteDataSource {
       endPoint: '/Transactions',
       data: transaction.toJson(),
     );
-    log('Transaction added remotely successfully!', name: 'Adding');
+    // log('Transaction added remotely successfully!', name: 'Adding');
     return TransactionModel.fromJson(response.data);
+  }
+
+  @override
+  Future<void> updateTransaction({
+    required TransactionModel transaction,
+  }) async {
+    await _apiService.put(
+      endPoint: '/Transactions/${transaction.id}',
+      data: transaction.toJson(),
+    );
+    // log('Transaction updated remotely successfully!', name: 'Updating');
   }
 }
