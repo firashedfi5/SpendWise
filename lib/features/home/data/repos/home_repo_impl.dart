@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:spendwise/core/errors/failure.dart';
 import 'package:spendwise/core/utils/api_service.dart';
+import 'package:spendwise/core/utils/functions/delete_data_locally.dart';
 import 'package:spendwise/features/home/data/repos/home_repo.dart';
 import 'package:spendwise/features/transactions/data/data_sources/home_local_data_source.dart';
 import 'package:spendwise/features/transactions/data/data_sources/home_remote_data_source.dart';
@@ -32,6 +35,7 @@ class HomeRepoImpl implements HomeRepo {
   //   }
   // }
 
+  //TODO: Data yet3malelha fetch ken mel local data source, ya3ni ayy transaction tetzed jdida maysirelhech fetch and cache locally
   @override
   Future<Either<Failure, List<TransactionModel>>> fetchTransactions({
     required String userId,
@@ -55,7 +59,13 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, Unit>> deleteTransaction({required int id}) async {
     try {
+      //* Delete transaction remotly
       await _apiService.delete(endPoint: '/Transactions/$id');
+      log('Transaction delete locally successfully!', name: 'Deleting');
+
+      //* Delete transaction locally
+      await deleteDataLocally(id);
+
       return right(unit);
     } catch (e) {
       if (e is DioException) {
