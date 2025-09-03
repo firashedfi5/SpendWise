@@ -20,16 +20,11 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
     setState(() {
       _selected = newSelection;
     });
-    context.read<FilteringCubit>().type = newSelection.toString();
+    context.read<FilteringCubit>().type = newSelection.first;
 
-    String filterType;
-    if (selected.contains('Income')) {
-      filterType = 'Income';
-    } else {
-      filterType = 'Expense';
-    }
-
-    context.read<FilteringCubit>().filterTransactions(type: filterType);
+    context.read<FilteringCubit>().filterTransactions(
+      type: context.read<FilteringCubit>().type,
+    );
   }
 
   @override
@@ -55,7 +50,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
                 if (states.contains(WidgetState.selected)) {
                   if (_selected.contains('Income')) {
                     return kPrimaryColor;
-                  } else if (_selected.contains('Expenses')) {
+                  } else if (_selected.contains('Expense')) {
                     return kSecondaryColor;
                   }
                 }
@@ -72,7 +67,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
             ),
             segments: const <ButtonSegment<String>>[
               ButtonSegment<String>(value: 'Income', label: Text('Income')),
-              ButtonSegment<String>(value: 'Expenses', label: Text('Expenses')),
+              ButtonSegment<String>(value: 'Expense', label: Text('Expenses')),
             ],
             selected: _selected,
             onSelectionChanged: updateSelected,
