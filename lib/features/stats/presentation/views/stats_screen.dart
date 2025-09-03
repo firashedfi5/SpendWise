@@ -25,7 +25,8 @@ class StatsScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              FilteringCubit(getIt.get<HomeRepoImpl>()),
+              FilteringCubit(getIt.get<HomeRepoImpl>())
+                ..filterTransactions(type: 'Income'),
         ),
       ],
       child: const Scaffold(body: SafeArea(child: StatsScreenBody())),

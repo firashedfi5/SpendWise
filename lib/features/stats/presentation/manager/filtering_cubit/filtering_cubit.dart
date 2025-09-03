@@ -11,6 +11,7 @@ class FilteringCubit extends Cubit<FilteringState> {
   FilteringCubit(this._homeRepo) : super(FilteringInitial());
 
   final HomeRepo _homeRepo;
+  String type = 'Income';
 
   Future<void> filterTransactions({required String type}) async {
     emit(FilteringLoading());

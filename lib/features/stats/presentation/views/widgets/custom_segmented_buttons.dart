@@ -12,7 +12,7 @@ class CustomSegmentedButton extends StatefulWidget {
 }
 
 class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
-  Set<String> _selected = {'Expenses'};
+  Set<String> _selected = {'Income'};
 
   Set<String> get selected => _selected;
 
@@ -20,6 +20,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
     setState(() {
       _selected = newSelection;
     });
+    context.read<FilteringCubit>().type = newSelection.toString();
 
     String filterType;
     if (selected.contains('Income')) {
