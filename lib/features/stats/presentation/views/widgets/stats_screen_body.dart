@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/filtering_cubit.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/custom_segmented_buttons.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/filtered_transactions_list_view_bloc_builder.dart';
@@ -40,6 +41,7 @@ class _StatsScreenBodyState extends State<StatsScreenBody> with RouteAware {
     context.read<FilteringCubit>().filterTransactions(
       type: context.read<FilteringCubit>().type,
     );
+    context.read<FetchTransactionsCubit>().fetchTransactions();
     log('StatsScreen', name: 'Refreshing');
   }
 

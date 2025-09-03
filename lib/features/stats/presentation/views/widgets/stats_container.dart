@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/utils/functions/month_formating.dart';
 import 'package:spendwise/core/utils/styles.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/chart.dart';
 
@@ -24,9 +25,9 @@ class StatsContainer extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const Text(
-                  'Apr 01 - Apr 30',
-                  style: TextStyle(color: kSecondaryTextColor),
+                Text(
+                  getMonthRangeStringWithIntl(DateTime.now().month),
+                  style: const TextStyle(color: kSecondaryTextColor),
                 ),
                 const Spacer(),
                 const Chart(),
