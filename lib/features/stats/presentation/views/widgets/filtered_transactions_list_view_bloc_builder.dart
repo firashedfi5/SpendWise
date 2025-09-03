@@ -9,6 +9,7 @@ import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/fi
 class FilteredTransactionsListViewBlocBuilder extends StatelessWidget {
   const FilteredTransactionsListViewBlocBuilder({super.key});
 
+  // TODO: improve the filtering
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
