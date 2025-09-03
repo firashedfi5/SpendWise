@@ -4,6 +4,7 @@ import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/home/data/repos/home_repo_impl.dart';
 import 'package:spendwise/features/home/presentation/manager/delete_transaction/delete_transaction_cubit.dart';
 import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
+import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/filtering_cubit.dart';
 import 'package:spendwise/features/stats/presentation/views/widgets/stats_screen_body.dart';
 
 class StatsScreen extends StatelessWidget {
@@ -21,6 +22,10 @@ class StatsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               DeleteTransactionCubit(getIt.get<HomeRepoImpl>()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              FilteringCubit(getIt.get<HomeRepoImpl>()),
         ),
       ],
       child: const Scaffold(body: SafeArea(child: StatsScreenBody())),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/filtering_cubit.dart';
 
 class CustomSegmentedButton extends StatefulWidget {
   const CustomSegmentedButton({super.key});
@@ -12,10 +14,21 @@ class CustomSegmentedButton extends StatefulWidget {
 class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
   Set<String> _selected = {'Expenses'};
 
+  Set<String> get selected => _selected;
+
   void updateSelected(Set<String> newSelection) {
     setState(() {
       _selected = newSelection;
     });
+
+    String filterType;
+    if (selected.contains('Income')) {
+      filterType = 'Income';
+    } else {
+      filterType = 'Expense';
+    }
+
+    context.read<FilteringCubit>().filterTransactions(type: filterType);
   }
 
   @override
@@ -33,11 +46,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
               ),
               side: WidgetStateProperty.all(BorderSide.none),
               shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    14,
-                  ), // Slightly smaller than container
-                ),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
               ),
               backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                 states,
