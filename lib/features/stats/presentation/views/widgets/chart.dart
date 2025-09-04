@@ -25,15 +25,11 @@ class Chart extends StatelessWidget {
           ],
           child: BlocBuilder<FetchTransactionsCubit, FetchTransactionsState>(
             builder: (context, state) {
-              double totalIncome = 0;
-              double totalExpenses = 0;
+              List<Map<String, double>> stats = [];
               if (state is FetchTransactionsSuccess) {
-                totalIncome = context
-                    .read<FetchTransactionsCubit>()
-                    .getTotalIncome(transactions: state.transactions);
-                totalExpenses = context
-                    .read<FetchTransactionsCubit>()
-                    .getTotalExpenses(transactions: state.transactions);
+                stats = context.read<FetchTransactionsCubit>().getWeeklyStats(
+                  transactions: state.transactions,
+                );
               }
               return BarChart(
                 BarChartData(
@@ -62,28 +58,15 @@ class Chart extends StatelessWidget {
                     ),
                   ),
                   maxY: 8000,
-                  barGroups: [
-                    customBarChart(
-                      x: 1,
-                      totalExpenses: totalExpenses,
-                      totalIncome: totalIncome,
-                    ),
-                    customBarChart(
-                      x: 2,
-                      totalExpenses: totalExpenses,
-                      totalIncome: totalIncome,
-                    ),
-                    customBarChart(
-                      x: 3,
-                      totalExpenses: totalExpenses,
-                      totalIncome: totalIncome,
-                    ),
-                    customBarChart(
-                      x: 4,
-                      totalExpenses: totalExpenses,
-                      totalIncome: totalIncome,
-                    ),
-                  ],
+                  barGroups: stats.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final data = entry.value;
+                    return customBarChart(
+                      x: index + 1,
+                      totalExpenses: data['Expense'] ?? 0,
+                      totalIncome: data['Income'] ?? 0,
+                    );
+                  }).toList(),
                 ),
               );
             },

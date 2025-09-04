@@ -20,10 +20,24 @@ class IncomeOutcomeHeader extends StatelessWidget {
               final transactions = state.transactions;
               totalIncome = context
                   .read<FetchTransactionsCubit>()
-                  .getTotalIncome(transactions: transactions);
+                  .getTotalIncome(
+                    transactions: transactions
+                        .where(
+                          (transaction) =>
+                              transaction.date!.month == DateTime.now().month,
+                        )
+                        .toList(),
+                  );
               totalExpenses = context
                   .read<FetchTransactionsCubit>()
-                  .getTotalExpenses(transactions: transactions);
+                  .getTotalExpenses(
+                    transactions: transactions
+                        .where(
+                          (transaction) =>
+                              transaction.date!.month == DateTime.now().month,
+                        )
+                        .toList(),
+                  );
             }
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +45,7 @@ class IncomeOutcomeHeader extends StatelessWidget {
                 StatsHeaderContainer(
                   color: kPrimaryColor,
                   amount: totalIncome,
-                  text: 'Total Income',
+                  text: 'Monthly Income',
                   icon: const Icon(
                     Icons.arrow_circle_down,
                     color: kPrimaryColor,
@@ -40,7 +54,7 @@ class IncomeOutcomeHeader extends StatelessWidget {
                 StatsHeaderContainer(
                   color: kSecondaryColor,
                   amount: totalExpenses,
-                  text: 'Total Expenses',
+                  text: 'Monthly Expenses',
                   icon: const Icon(
                     Icons.arrow_circle_up,
                     color: kSecondaryColor,

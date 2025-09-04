@@ -26,7 +26,7 @@ class StatsHeaderContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(kBorderRadius24),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(14),
         child: Column(
           children: [
             Text(text, style: Styles.textStyle16),

@@ -11,7 +11,6 @@ String getMonthRangeStringWithIntl(int monthNumber, {int? year}) {
 
   final lastDay = DateTime(year, monthNumber + 1, 0);
 
-  // Format the dates
   final monthFormatter = DateFormat('MMM');
   final dayFormatter = DateFormat('dd');
 
