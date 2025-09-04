@@ -85,4 +85,50 @@ class FetchTransactionsCubit extends Cubit<FetchTransactionsState> {
     }
     return totalExpenses;
   }
+
+  //* Stats method
+  List<Map<String, double>> getWeeklyStats({
+    required List<TransactionModel> transactions,
+  }) {
+    List<Map<String, double>> stats = [
+      {'Income': 0.0, 'Expense': 0.0}, //* Week 1: Days 1-7
+      {'Income': 0.0, 'Expense': 0.0}, //* Week 2: Days 8-14
+      {'Income': 0.0, 'Expense': 0.0}, //* Week 3: Days 15-21
+      {'Income': 0.0, 'Expense': 0.0}, //* Week 4: Days 22-end
+    ];
+
+    final now = DateTime.now();
+    final currentMonth = now.month - 0;
+    final currentYear = now.year;
+
+    for (var transaction in transactions) {
+      if (transaction.date == null ||
+          transaction.date!.month != currentMonth ||
+          transaction.date!.year != currentYear) {
+        continue;
+      }
+
+      final day = transaction.date!.day;
+      final amount = transaction.amount ?? 0.0;
+
+      int weekIndex;
+      if (day <= 7) {
+        weekIndex = 0; //* Week 1
+      } else if (day <= 14) {
+        weekIndex = 1; //* Week 2
+      } else if (day <= 21) {
+        weekIndex = 2; //* Week 3
+      } else {
+        weekIndex = 3; //* Week 4
+      }
+
+      if (transaction.type == 'Income') {
+        stats[weekIndex]['Income'] = stats[weekIndex]['Income']! + amount;
+      } else if (transaction.type == 'Expense') {
+        stats[weekIndex]['Expense'] = stats[weekIndex]['Expense']! + amount;
+      }
+    }
+
+    return stats;
+  }
 }

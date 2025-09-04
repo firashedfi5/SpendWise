@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/filtering_cubit.dart';
 
 class CustomSegmentedButton extends StatefulWidget {
   const CustomSegmentedButton({super.key});
@@ -10,12 +12,19 @@ class CustomSegmentedButton extends StatefulWidget {
 }
 
 class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
-  Set<String> _selected = {'Expenses'};
+  Set<String> _selected = {'Income'};
+
+  Set<String> get selected => _selected;
 
   void updateSelected(Set<String> newSelection) {
     setState(() {
       _selected = newSelection;
     });
+    context.read<FilteringCubit>().type = newSelection.first;
+
+    context.read<FilteringCubit>().filterTransactions(
+      type: context.read<FilteringCubit>().type,
+    );
   }
 
   @override
@@ -33,11 +42,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
               ),
               side: WidgetStateProperty.all(BorderSide.none),
               shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    14,
-                  ), // Slightly smaller than container
-                ),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
               ),
               backgroundColor: WidgetStateProperty.resolveWith<Color?>((
                 states,
@@ -45,7 +50,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
                 if (states.contains(WidgetState.selected)) {
                   if (_selected.contains('Income')) {
                     return kPrimaryColor;
-                  } else if (_selected.contains('Expenses')) {
+                  } else if (_selected.contains('Expense')) {
                     return kSecondaryColor;
                   }
                 }
@@ -62,7 +67,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
             ),
             segments: const <ButtonSegment<String>>[
               ButtonSegment<String>(value: 'Income', label: Text('Income')),
-              ButtonSegment<String>(value: 'Expenses', label: Text('Expenses')),
+              ButtonSegment<String>(value: 'Expense', label: Text('Expenses')),
             ],
             selected: _selected,
             onSelectionChanged: updateSelected,
