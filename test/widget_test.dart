@@ -7,12 +7,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:spendwise/features/settings/presentation/manager/theme_bloc/theme_bloc.dart';
 import 'package:spendwise/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    var themeBloc;
+    final themeBloc = await ThemeBloc.create();
     await tester.pumpWidget(SpendWise(themeBloc: themeBloc));
 
     // Verify that our counter starts at 0.

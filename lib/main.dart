@@ -7,6 +7,8 @@ import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/bloc_observer.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/utils/themes.dart';
+import 'package:spendwise/features/home/data/repos/home_repo_impl.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/settings/presentation/manager/theme_bloc/theme_bloc.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
@@ -33,8 +35,17 @@ class SpendWise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ThemeBloc>.value(
-      value: themeBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeBloc>.value(
+          value: themeBloc,
+        ),
+        BlocProvider(
+          create: (context) =>
+              FetchTransactionsCubit(getIt.get<HomeRepoImpl>())
+                ..fetchTransactions(),
+        ),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
           return MaterialApp.router(
@@ -49,3 +60,19 @@ class SpendWise extends StatelessWidget {
     );
   }
 }
+
+
+// BlocProvider<ThemeBloc>.value(
+//       value: themeBloc,
+//       child: BlocBuilder<ThemeBloc, ThemeMode>(
+//         builder: (context, state) {
+//           return MaterialApp.router(
+//             theme: lightTheme,
+//             darkTheme: darkTheme,
+//             themeMode: state,
+//             routerConfig: AppRouter.router,
+//             debugShowCheckedModeBanner: false,
+//           );
+//         },
+//       ),
+//     );
