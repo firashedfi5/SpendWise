@@ -13,7 +13,7 @@ class SettingsHeader extends StatelessWidget {
       children: [
         const CircleAvatar(
           backgroundImage: AssetImage(AssetsData.defaultAvatar),
-          radius: 85,
+          radius: 75,
         ),
         const SizedBox(height: 10),
         Text(
