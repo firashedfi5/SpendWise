@@ -6,6 +6,8 @@ import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/bloc_observer.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
+import 'package:spendwise/core/utils/themes.dart';
+import 'package:spendwise/features/settings/presentation/manager/theme_bloc/theme_bloc.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 import 'firebase_options.dart';
@@ -18,18 +20,32 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionModelAdapter());
   await Hive.openBox<TransactionModel>(kTransactionsBox);
-  runApp(const SpendWise());
+
+  final themeBloc = await ThemeBloc.create();
+
+  runApp(SpendWise(themeBloc: themeBloc));
 }
 
 class SpendWise extends StatelessWidget {
-  const SpendWise({super.key});
+  const SpendWise({super.key, required this.themeBloc});
+
+  final ThemeBloc themeBloc;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      // theme: ThemeData.dark(),
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider<ThemeBloc>.value(
+      value: themeBloc,
+      child: BlocBuilder<ThemeBloc, ThemeMode>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: state,
+            routerConfig: AppRouter.router,
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }
