@@ -18,3 +18,9 @@ final class UpdateProfileFailure extends UpdateProfileState {
 
   const UpdateProfileFailure({required this.errMessage});
 }
+
+final class ImagePicked extends UpdateProfileState {
+  final File pickedImageFile;
+
+  const ImagePicked({required this.pickedImageFile});
+}
