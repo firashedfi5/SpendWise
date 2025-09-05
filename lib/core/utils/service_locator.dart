@@ -7,6 +7,7 @@ import 'package:spendwise/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:spendwise/features/home/data/data_sources/home_local_data_source.dart';
 import 'package:spendwise/features/home/data/data_sources/home_remote_data_source.dart';
 import 'package:spendwise/features/home/data/repos/home_repo_impl.dart';
+import 'package:spendwise/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:spendwise/features/transactions/data/data_sources/transactions_local_data_source.dart';
 import 'package:spendwise/features/transactions/data/data_sources/transactions_remote_data_source.dart';
 import 'package:spendwise/features/transactions/data/repo/transactions_repo_impl.dart';
@@ -31,5 +32,8 @@ void setup() {
       TransactionsRemoteDataSourceImpl(getIt.get<ApiService>()),
       TransactionsLocalDataSourceImpl(),
     ),
+  );
+  getIt.registerSingleton<SettingsRepoImpl>(
+    SettingsRepoImpl(getIt.get<ApiService>()),
   );
 }

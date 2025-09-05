@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
+import 'package:spendwise/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:spendwise/features/settings/presentation/views/widgets/account_info_screen_body.dart';
 
@@ -9,7 +11,7 @@ class AccountInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UpdateProfileCubit(),
+      create: (context) => UpdateProfileCubit(getIt.get<SettingsRepoImpl>()),
       child: Scaffold(
         appBar: AppBar(title: const Text('Account Info'), centerTitle: true),
         body: const AccountInfoScreenBody(),
