@@ -4,6 +4,7 @@ import 'package:spendwise/features/auth/presentation/views/forgot_passwrod_scree
 import 'package:spendwise/features/auth/presentation/views/login_screen.dart';
 import 'package:spendwise/features/auth/presentation/views/signup_screen.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/main_screen.dart';
+import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:spendwise/features/settings/presentation/views/account_info_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/language_screen.dart';
 import 'package:spendwise/features/settings/presentation/views/settings_screen.dart';
@@ -62,11 +63,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSettingsScreen,
-        builder: (context, state) => const SettingsScreen(),
+        builder: (context, state) {
+          final UpdateProfileCubit cubit = state.extra as UpdateProfileCubit;
+          return SettingsScreen(cubit: cubit);
+        },
       ),
       GoRoute(
         path: kAccountInfoScreen,
-        builder: (context, state) => const AccountInfoScreen(),
+        builder: (context, state) {
+          final UpdateProfileCubit cubit = state.extra as UpdateProfileCubit;
+          return AccountInfoScreen(cubit: cubit);
+        },
       ),
       GoRoute(
         path: kLanguageScreen,

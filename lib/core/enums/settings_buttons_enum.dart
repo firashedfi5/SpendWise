@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 
 enum SettingsButtonsEnum {
   accountInfo,
@@ -71,7 +72,8 @@ extension SettingsButtonsEnumExtension on SettingsButtonsEnum {
   void execute(BuildContext context) {
     switch (this) {
       case SettingsButtonsEnum.accountInfo:
-        context.push(AppRouter.kAccountInfoScreen);
+        final cubit = context.read<UpdateProfileCubit>();
+        context.push(AppRouter.kAccountInfoScreen, extra: cubit);
         break;
       case SettingsButtonsEnum.language:
         context.push(AppRouter.kLanguageScreen);
