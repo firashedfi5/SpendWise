@@ -46,6 +46,7 @@ class SignupForm extends StatelessWidget {
               userId: state.user.uid,
               username: state.user.displayName,
               email: state.user.email,
+              photoURL: '',
             ),
           );
         } else if (state is UserCreationFailure) {
