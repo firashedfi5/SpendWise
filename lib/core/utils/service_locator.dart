@@ -17,11 +17,14 @@ import 'package:spendwise/features/transactions/data/repo/transactions_repo_impl
 final getIt = GetIt.instance;
 
 void setup() {
-  getIt.registerSingleton<ApiService>(ApiService(Dio()));
-  getIt.registerSingleton<AuthService>(AuthService());
-  getIt.registerSingleton<FirebaseService>(FirebaseService());
   getIt.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
+
+  getIt.registerSingleton<ApiService>(ApiService(Dio()));
+  getIt.registerSingleton<AuthService>(AuthService());
+
+  getIt.registerSingleton<FirebaseService>(FirebaseService());
+
   getIt.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(getIt.get<ApiService>(), getIt.get<AuthService>()),
   );
