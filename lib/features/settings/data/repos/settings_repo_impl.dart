@@ -15,8 +15,9 @@ class SettingsRepoImpl implements SettingsRepo {
   @override
   Future<Either<Failure, User>> updateProfile({required UserModel user}) async {
     try {
-      await getIt.get<FirebaseAuth>().currentUser!.updateDisplayName(
-        user.username,
+      await getIt.get<FirebaseAuth>().currentUser!.updateProfile(
+        displayName: user.username,
+        photoURL: user.photoURL,
       );
       await getIt.get<FirebaseAuth>().currentUser!.reload();
       final User refreshedUser = getIt.get<FirebaseAuth>().currentUser!;
