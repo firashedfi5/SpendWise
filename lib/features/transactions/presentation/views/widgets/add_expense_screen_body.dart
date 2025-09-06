@@ -70,7 +70,7 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                 CustomTextFormField(
                   textController: titleController,
                   label: 'Expense Title',
-                  hintText: 'Travel trip to canada',
+                  hintText: 'Travel trip',
                 ),
                 const SizedBox(height: 30),
                 AmountTextFormField(amountController: amountController),
@@ -103,6 +103,7 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: DateTime.now(),
                             ),
                           );
                     } else {
@@ -123,6 +124,9 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .createdAt,
                             ),
                           );
                     }

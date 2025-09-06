@@ -115,6 +115,7 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: DateTime.now(),
                             ),
                           );
                     } else {
@@ -135,6 +136,9 @@ class _AddIncomeScreenBodyState extends State<AddIncomeScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .createdAt,
                             ),
                           );
                     }

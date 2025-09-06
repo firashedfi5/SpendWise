@@ -26,6 +26,9 @@ class TransactionModel extends Equatable {
   @HiveField(6)
   final DateTime? date;
 
+  @HiveField(7)
+  final DateTime? createdAt;
+
   const TransactionModel({
     this.id,
     this.userId,
@@ -34,6 +37,7 @@ class TransactionModel extends Equatable {
     this.amount,
     this.category,
     this.date,
+    this.createdAt,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
@@ -47,6 +51,9 @@ class TransactionModel extends Equatable {
       date: json['date'] == null
           ? null
           : DateTime.parse(json['date'] as String),
+      createdAt: json['date'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
   }
 
@@ -58,6 +65,7 @@ class TransactionModel extends Equatable {
     'amount': amount,
     'category': category,
     'date': date?.toIso8601String(),
+    'createdAt': createdAt?.toIso8601String(),
   };
 
   TransactionModel copyWith({
@@ -68,6 +76,7 @@ class TransactionModel extends Equatable {
     double? amount,
     String? category,
     DateTime? date,
+    DateTime? createdAt,
   }) {
     return TransactionModel(
       id: id ?? this.id,
@@ -77,6 +86,7 @@ class TransactionModel extends Equatable {
       amount: amount ?? this.amount,
       category: category ?? this.category,
       date: date ?? this.date,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -84,5 +94,14 @@ class TransactionModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [id, userId, type, title, amount, category, date];
+  List<Object?> get props => [
+    id,
+    userId,
+    type,
+    title,
+    amount,
+    category,
+    date,
+    createdAt,
+  ];
 }

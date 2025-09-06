@@ -61,7 +61,10 @@ class FilteredTransactionsListViewBlocBuilder extends StatelessWidget {
                 ),
               );
             }
-            return TransactionsListView(transactions: transactions);
+            return TransactionsListView(
+              transactions: transactions,
+              isHome: false,
+            );
           } else if (state is FilteringFailure) {
             return const SliverToBoxAdapter(
               child: Column(
