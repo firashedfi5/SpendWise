@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,14 +15,24 @@ class SettingsHeader extends StatelessWidget {
     return BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
       builder: (context, state) {
         String? updatedUsername;
+        String? photoURL;
         if (state is UpdateProfileSuccess) {
           updatedUsername = state.user.displayName;
+          photoURL = state.user.photoURL;
         }
         return Column(
           children: [
-            const CircleAvatar(
-              backgroundImage: AssetImage(AssetsData.defaultAvatar),
+            CircleAvatar(
               radius: 75,
+              backgroundColor: Colors.grey,
+              backgroundImage: const AssetImage(AssetsData.defaultAvatar),
+              foregroundImage: photoURL != null
+                  ? CachedNetworkImageProvider(photoURL)
+                  : getIt.get<FirebaseAuth>().currentUser?.photoURL != null
+                  ? CachedNetworkImageProvider(
+                      getIt.get<FirebaseAuth>().currentUser!.photoURL!,
+                    )
+                  : null,
             ),
             const SizedBox(height: 10),
             Text(

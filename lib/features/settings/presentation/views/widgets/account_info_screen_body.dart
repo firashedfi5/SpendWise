@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,11 +32,15 @@ class _AccountInfoScreenBodyState extends State<AccountInfoScreenBody> {
         .displayName!;
   }
 
+  File? photo;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
-        if (state is UpdateProfileFailure) {
+        if (state is ImagePicked) {
+          photo = state.pickedImageFile;
+        } else if (state is UploadPhotoFailure) {
           customSnackBar(
             context: context,
             message: state.errMessage,
@@ -46,8 +52,13 @@ class _AccountInfoScreenBodyState extends State<AccountInfoScreenBody> {
             message: 'Profile updated successfully',
             success: true,
           );
+        } else if (state is UpdateProfileFailure) {
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
         }
-        context.pop();
       },
       builder: (context, state) {
         return SingleChildScrollView(
@@ -67,14 +78,20 @@ class _AccountInfoScreenBodyState extends State<AccountInfoScreenBody> {
                     backgroundColor: kPrimaryColor,
                     foregroundColor: Colors.white,
                     label: 'Update',
-                    onPressed: () {
-                      context.read<UpdateProfileCubit>().updateProfile(
+                    onPressed: () async {
+                      final cubit = context.read<UpdateProfileCubit>();
+                      await cubit.updateProfile(
                         user: UserModel(
                           userId: getIt.get<FirebaseAuth>().currentUser!.uid,
                           email: getIt.get<FirebaseAuth>().currentUser!.email!,
                           username: usernameController.text,
+                          photoURL: '',
                         ),
+                        imageFile: photo,
                       );
+                      if (context.mounted) {
+                        context.pop();
+                      }
                     },
                   ),
                 ],

@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:spendwise/core/utils/assets.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 
 class ProfilImage extends StatelessWidget {
@@ -24,6 +27,10 @@ class ProfilImage extends StatelessWidget {
               backgroundColor: Colors.grey,
               foregroundImage: pickedImageFile != null
                   ? FileImage(pickedImageFile)
+                  : getIt.get<FirebaseAuth>().currentUser?.photoURL != null
+                  ? CachedNetworkImageProvider(
+                      getIt.get<FirebaseAuth>().currentUser!.photoURL!,
+                    )
                   : const AssetImage(AssetsData.defaultAvatar),
             ),
             const SizedBox(height: 10),
@@ -48,7 +55,7 @@ class ProfilImage extends StatelessWidget {
                       onTap: () {
                         Navigator.of(ctx).pop();
                         context.read<UpdateProfileCubit>().pickImage(
-                          ImageSource.camera,
+                          ImageSource.gallery,
                         );
                       },
                     ),

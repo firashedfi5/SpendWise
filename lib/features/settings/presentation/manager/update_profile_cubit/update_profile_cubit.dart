@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
 import 'package:spendwise/features/settings/data/repos/settings_repo.dart';
 
@@ -14,12 +15,45 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   final SettingsRepo _settingsRepo;
 
-  Future<void> updateProfile({required UserModel user}) async {
-    final result = await _settingsRepo.updateProfile(user: user);
-    result.fold(
-      (failure) => emit(UpdateProfileFailure(errMessage: failure.message)),
-      (user) => emit(UpdateProfileSuccess(user: user)),
-    );
+  Future<void> updateProfile({required UserModel user, File? imageFile}) async {
+    try {
+      emit(UpdateProfileLoading());
+
+      String? finalPhotoURL;
+
+      //* First upload photo if provided
+      if (imageFile != null) {
+        emit(UploadPhotoLoading());
+        final uploadResult = await _settingsRepo.uploadPhoto(
+          imageFile: imageFile,
+        );
+
+        uploadResult.fold(
+          (failure) {
+            emit(UploadPhotoFailure(errMessage: failure.message));
+            return;
+          },
+          (photoURL) {
+            finalPhotoURL = photoURL;
+            emit(UploadPhotoSuccess(photoURL: photoURL));
+          },
+        );
+      }
+
+      //* Then update profile with the photo URL
+      final updatedUser = user.copyWith(
+        photoURL:
+            finalPhotoURL ?? getIt.get<FirebaseAuth>().currentUser!.photoURL,
+      );
+      final result = await _settingsRepo.updateProfile(user: updatedUser);
+
+      result.fold(
+        (failure) => emit(UpdateProfileFailure(errMessage: failure.message)),
+        (user) => emit(UpdateProfileSuccess(user: user)),
+      );
+    } catch (e) {
+      emit(UpdateProfileFailure(errMessage: e.toString()));
+    }
   }
 
   void pickImage(ImageSource source) async {
@@ -34,14 +68,5 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     }
 
     emit(ImagePicked(pickedImageFile: File(pickedImage.path)));
-  }
-
-  Future<void> uploadPhoto({required File imageFile}) async {
-    emit(UploadPhotoLoading());
-    final result = await _settingsRepo.uploadPhoto(imageFile: imageFile);
-    result.fold(
-      (failure) => emit(UploadPhotoFailure(errMessage: failure.message)),
-      (photoURL) => emit(UploadPhotoSuccess(photoURL: photoURL)),
-    );
   }
 }

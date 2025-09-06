@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,14 +19,23 @@ class CustomAppBar extends StatelessWidget {
       title: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
         builder: (context, state) {
           String? updatedUsername;
+          String? photoURL;
           if (state is UpdateProfileSuccess) {
             updatedUsername = state.user.displayName;
+            photoURL = state.user.photoURL;
           }
           return Row(
             children: [
-              const CircleAvatar(
-                backgroundColor: Colors.red,
-                backgroundImage: AssetImage(AssetsData.defaultAvatar),
+              CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: const AssetImage(AssetsData.defaultAvatar),
+                foregroundImage: photoURL != null
+                    ? CachedNetworkImageProvider(photoURL)
+                    : getIt.get<FirebaseAuth>().currentUser?.photoURL != null
+                    ? CachedNetworkImageProvider(
+                        getIt.get<FirebaseAuth>().currentUser!.photoURL!,
+                      )
+                    : null,
               ),
               const SizedBox(width: 10),
               Column(
