@@ -7,7 +7,9 @@ import 'package:spendwise/features/home/presentation/views/widgets/transactions_
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_loading.dart';
 
 class TransactionListViewBlocBuilder extends StatelessWidget {
-  const TransactionListViewBlocBuilder({super.key});
+  const TransactionListViewBlocBuilder({super.key, required this.isHome});
+
+  final bool isHome;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,10 @@ class TransactionListViewBlocBuilder extends StatelessWidget {
                 ),
               );
             }
-            return TransactionsListView(transactions: transactions);
+            return TransactionsListView(
+              transactions: transactions,
+              isHome: isHome,
+            );
           } else if (state is FetchTransactionsFailure) {
             return const SliverToBoxAdapter(
               child: Column(

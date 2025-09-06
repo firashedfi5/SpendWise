@@ -8,9 +8,14 @@ import 'package:spendwise/features/home/presentation/views/widgets/transactions_
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class TransactionsListView extends StatelessWidget {
-  const TransactionsListView({super.key, required this.transactions});
+  const TransactionsListView({
+    super.key,
+    required this.transactions,
+    required this.isHome,
+  });
 
   final List<TransactionModel> transactions;
+  final bool isHome;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class TransactionsListView extends StatelessWidget {
               child: TransactionsListViewItem(transaction: transactions[index]),
             ),
           );
-        }, childCount: transactions.length),
+        }, childCount: isHome == true ? 4 : transactions.length),
       ),
     );
   }

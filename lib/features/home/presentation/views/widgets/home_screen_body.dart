@@ -48,7 +48,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> with RouteAware {
         CustomAppBar(),
         HomeCard(),
         TransactionsHeader(),
-        TransactionListViewBlocBuilder(),
+        TransactionListViewBlocBuilder(isHome: true,),
       ],
     );
   }
