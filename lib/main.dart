@@ -37,9 +37,7 @@ class SpendWise extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ThemeBloc>.value(
-          value: themeBloc,
-        ),
+        BlocProvider<ThemeBloc>.value(value: themeBloc),
         BlocProvider(
           create: (context) =>
               FetchTransactionsCubit(getIt.get<HomeRepoImpl>())

@@ -1,27 +1,50 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/assets.dart';
 import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 
 class SettingsHeader extends StatelessWidget {
   const SettingsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CircleAvatar(
-          backgroundImage: AssetImage(AssetsData.defaultAvatar),
-          radius: 85,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          getIt.get<FirebaseAuth>().currentUser!.displayName ?? 'Unkown',
-          style: Styles.textStyle22,
-        ),
-        Text(getIt.get<FirebaseAuth>().currentUser!.email ?? ''),
-      ],
+    return BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+      builder: (context, state) {
+        String? updatedUsername;
+        String? photoURL;
+        if (state is UpdateProfileSuccess) {
+          updatedUsername = state.user.displayName;
+          photoURL = state.user.photoURL;
+        }
+        return Column(
+          children: [
+            CircleAvatar(
+              radius: 75,
+              backgroundColor: Colors.grey,
+              backgroundImage: const AssetImage(AssetsData.defaultAvatar),
+              foregroundImage: photoURL != null
+                  ? CachedNetworkImageProvider(photoURL)
+                  : getIt.get<FirebaseAuth>().currentUser?.photoURL != null
+                  ? CachedNetworkImageProvider(
+                      getIt.get<FirebaseAuth>().currentUser!.photoURL!,
+                    )
+                  : null,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              updatedUsername ??
+                  getIt.get<FirebaseAuth>().currentUser!.displayName ??
+                  'Unkown',
+              style: Styles.textStyle22,
+            ),
+            Text(getIt.get<FirebaseAuth>().currentUser!.email ?? ''),
+          ],
+        );
+      },
     );
   }
 }
