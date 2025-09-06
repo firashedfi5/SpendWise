@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/styles.dart';
+import 'package:spendwise/features/transactions/presentation/manager/add_update_transaction/add_update_transaction_cubit.dart';
 import 'package:spendwise/features/transactions/presentation/views/widgets/category_selector.dart';
 
 class SelectCategory extends StatelessWidget {
@@ -16,15 +18,28 @@ class SelectCategory extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           children: [
-            FilterChip(label: const Text('Salary'), onSelected: (value) {}),
-            const SizedBox(width: 8),
-            FilterChip(label: const Text('Discount'), onSelected: (value) {}),
+            BlocBuilder<AddUpdateTransactionCubit, AddUpdateTransactionState>(
+              builder: (context, state) {
+                String? category;
+                if (state is CategoryUpdated) {
+                  category = state.category;
+                } else if (state is UpdateTransactionInitial) {
+                  category = state.transaction.category;
+                }
+                return Chip(label: Text(category ?? 'Select category'));
+              },
+            ),
             IconButton(
-              onPressed: () {
-                showModalBottomSheet(
+              onPressed: () async {
+                final cubit = context.read<AddUpdateTransactionCubit>();
+
+                await showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
-                  builder: (context) => CategorySelector(isIncome: isIncome),
+                  builder: (context) => BlocProvider.value(
+                    value: cubit,
+                    child: CategorySelector(isIncome: isIncome),
+                  ),
                 );
               },
               icon: const Icon(Icons.add, size: 30),

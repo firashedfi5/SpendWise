@@ -1,5 +1,5 @@
 class AssetsData {
-  static const testProfilePicture = 'assets/images/test_image.jpg';
+  static const defaultAvatar = 'assets/images/default_avatar.png';
   static const loginIllustration = 'assets/images/login.png';
 
   static const logo = 'assets/logos/SpendWise_logo.png';

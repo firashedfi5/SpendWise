@@ -31,8 +31,7 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () =>
-            GoRouter.of(context).push(AppRouter.kAddTransactionScreen),
+        onPressed: () => context.push(AppRouter.kAddTransactionScreen),
         shape: const CircleBorder(),
         child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),

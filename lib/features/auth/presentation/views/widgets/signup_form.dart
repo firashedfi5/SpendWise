@@ -1,11 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
 import 'package:spendwise/core/utils/app_router.dart';
+import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/core/widgets/custom_elevated_button.dart';
-import 'package:spendwise/features/transactions/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:spendwise/core/widgets/custom_text_form_field.dart';
+import 'package:spendwise/features/auth/data/models/user_model.dart';
+import 'package:spendwise/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:spendwise/features/auth/presentation/views/widgets/password_form_field.dart';
 
 class SignupForm extends StatelessWidget {
   const SignupForm({
@@ -21,39 +24,81 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          CustomTextFormField(
-            textController: nameController,
-            label: 'Name',
-            hintText: 'Enter your name',
-          ),
-          const SizedBox(height: 10),
-          CustomTextFormField(
-            textController: emailController,
-            label: 'Email',
-            hintText: 'Enter your email',
-          ),
-          const SizedBox(height: 10),
-          CustomTextFormField(
-            textController: passwordController,
-            label: 'Password',
-            hintText: 'Enter your password',
-          ),
-          const SizedBox(height: 35),
-          CustomElevatedButton(
-            backgroundColor: kPrimaryColor,
-            foregroundColor: Colors.white,
-            label: 'Sign up',
-            onPressed: () {
-              GoRouter.of(context).push(AppRouter.kMainScreen);
-              log(nameController.text);
-              log(emailController.text);
-              log(passwordController.text);
-            },
-          ),
-        ],
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is SignupLoading) {
+          showDialog(
+            context: context,
+            builder: (context) =>
+                const Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is SignupFailure) {
+          Navigator.of(context).pop();
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
+        } else if (state is SignupSuccess) {
+          Navigator.of(context).pop();
+          context.read<AuthCubit>().createUser(
+            user: UserModel(
+              userId: state.user.uid,
+              username: state.user.displayName,
+              email: state.user.email,
+              photoURL: '',
+            ),
+          );
+        } else if (state is UserCreationFailure) {
+          customSnackBar(
+            context: context,
+            message: state.errMessage,
+            success: false,
+          );
+        } else if (state is UserCreationSuccess) {
+          customSnackBar(
+            context: context,
+            message: 'Account created successfully',
+            success: true,
+          );
+          context.go(AppRouter.kMainScreen);
+        }
+      },
+      child: Form(
+        child: Column(
+          children: [
+            CustomTextFormField(
+              textController: nameController,
+              label: 'Name',
+              hintText: 'Enter your name',
+            ),
+            const SizedBox(height: 10),
+            CustomTextFormField(
+              textController: emailController,
+              label: 'Email',
+              hintText: 'Enter your email',
+            ),
+            const SizedBox(height: 10),
+            PasswordFormField(
+              textController: passwordController,
+              label: 'Password',
+              hintText: 'Enter your password',
+            ),
+            const SizedBox(height: 35),
+            CustomElevatedButton(
+              backgroundColor: kPrimaryColor,
+              foregroundColor: Colors.white,
+              label: 'Sign up',
+              onPressed: () {
+                context.read<AuthCubit>().signup(
+                  email: emailController.text,
+                  password: passwordController.text,
+                  username: nameController.text,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

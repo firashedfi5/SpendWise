@@ -7,3 +7,4 @@ const Color kScaffoldBackgroundColor = Color(0xfff3f5f7);
 const Color kSecondaryTextColor = Color(0xFF939396);
 const double kPadding24 = 24;
 const double kBorderRadius24 = 24;
+const String kTransactionsBox = 'transactions_box';
