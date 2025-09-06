@@ -35,4 +35,13 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
     emit(ImagePicked(pickedImageFile: File(pickedImage.path)));
   }
+
+  Future<void> uploadPhoto({required File imageFile}) async {
+    emit(UploadPhotoLoading());
+    final result = await _settingsRepo.uploadPhoto(imageFile: imageFile);
+    result.fold(
+      (failure) => emit(UploadPhotoFailure(errMessage: failure.message)),
+      (photoURL) => emit(UploadPhotoSuccess(photoURL: photoURL)),
+    );
+  }
 }

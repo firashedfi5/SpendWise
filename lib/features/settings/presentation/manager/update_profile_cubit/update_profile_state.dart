@@ -31,3 +31,18 @@ final class ImagePicked extends UpdateProfileState {
 
   const ImagePicked({required this.pickedImageFile});
 }
+
+//* Photo Uploading states
+final class UploadPhotoLoading extends UpdateProfileState {}
+
+final class UploadPhotoSuccess extends UpdateProfileState {
+  final String photoURL;
+
+  const UploadPhotoSuccess({required this.photoURL});
+}
+
+final class UploadPhotoFailure extends UpdateProfileState {
+  final String errMessage;
+
+  const UploadPhotoFailure({required this.errMessage});
+}
