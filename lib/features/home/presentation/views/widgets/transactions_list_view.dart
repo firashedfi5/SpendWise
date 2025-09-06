@@ -22,36 +22,45 @@ class TransactionsListView extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: kPadding24),
       sliver: SliverList(
-        delegate: SliverChildBuilderDelegate((context, index) {
-          return Dismissible(
-            key: ValueKey(transactions[index].id),
-            background: Container(
-              alignment: Alignment.centerRight,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              color: Colors.red.withValues(alpha: 0.15),
-              child: const Icon(Icons.delete, color: Colors.red, size: 30),
-            ),
-            direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              context.read<DeleteTransactionCubit>().deleteTransaction(
-                id: transactions[index].id!,
-              );
-              transactions.remove(transactions[index]);
-            },
-            child: GestureDetector(
-              onTap: () => transactions[index].type == 'Income'
-                  ? context.push(
-                      AppRouter.kAddIncomeScreen,
-                      extra: transactions[index],
-                    )
-                  : context.push(
-                      AppRouter.kAddExpenseScreen,
-                      extra: transactions[index],
-                    ),
-              child: TransactionsListViewItem(transaction: transactions[index]),
-            ),
-          );
-        }, childCount: isHome == true ? 4 : transactions.length),
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            return Dismissible(
+              key: ValueKey(transactions[index].id),
+              background: Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                color: Colors.red.withValues(alpha: 0.15),
+                child: const Icon(Icons.delete, color: Colors.red, size: 30),
+              ),
+              direction: DismissDirection.endToStart,
+              onDismissed: (direction) {
+                context.read<DeleteTransactionCubit>().deleteTransaction(
+                  id: transactions[index].id!,
+                );
+                transactions.remove(transactions[index]);
+              },
+              child: GestureDetector(
+                onTap: () => transactions[index].type == 'Income'
+                    ? context.push(
+                        AppRouter.kAddIncomeScreen,
+                        extra: transactions[index],
+                      )
+                    : context.push(
+                        AppRouter.kAddExpenseScreen,
+                        extra: transactions[index],
+                      ),
+                child: TransactionsListViewItem(
+                  transaction: transactions[index],
+                ),
+              ),
+            );
+          },
+          childCount: isHome == true
+              ? transactions.length >= 4
+                    ? 4
+                    : transactions.length
+              : transactions.length,
+        ),
       ),
     );
   }
