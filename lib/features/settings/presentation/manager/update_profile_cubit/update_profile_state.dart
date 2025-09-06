@@ -11,7 +11,14 @@ final class UpdateProfileInitial extends UpdateProfileState {}
 
 final class UpdateProfileLoading extends UpdateProfileState {}
 
-final class UpdateProfileSuccess extends UpdateProfileState {}
+final class UpdateProfileSuccess extends UpdateProfileState {
+  final User user;
+
+  const UpdateProfileSuccess({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}
 
 final class UpdateProfileFailure extends UpdateProfileState {
   final String errMessage;

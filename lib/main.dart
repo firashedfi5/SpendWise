@@ -9,7 +9,9 @@ import 'package:spendwise/core/utils/service_locator.dart';
 import 'package:spendwise/core/utils/themes.dart';
 import 'package:spendwise/features/home/data/repos/home_repo_impl.dart';
 import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
+import 'package:spendwise/features/settings/data/repos/settings_repo_impl.dart';
 import 'package:spendwise/features/settings/presentation/manager/theme_bloc/theme_bloc.dart';
+import 'package:spendwise/features/settings/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 import 'firebase_options.dart';
@@ -37,13 +39,15 @@ class SpendWise extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ThemeBloc>.value(
-          value: themeBloc,
-        ),
+        BlocProvider<ThemeBloc>.value(value: themeBloc),
         BlocProvider(
           create: (context) =>
               FetchTransactionsCubit(getIt.get<HomeRepoImpl>())
                 ..fetchTransactions(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              UpdateProfileCubit(getIt.get<SettingsRepoImpl>()),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(

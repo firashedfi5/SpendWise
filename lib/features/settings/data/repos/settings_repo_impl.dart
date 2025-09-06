@@ -13,17 +13,18 @@ class SettingsRepoImpl implements SettingsRepo {
   SettingsRepoImpl(this._apiService);
 
   @override
-  Future<Either<Failure, Unit>> updateProfile({required UserModel user}) async {
+  Future<Either<Failure, User>> updateProfile({required UserModel user}) async {
     try {
       await getIt.get<FirebaseAuth>().currentUser!.updateDisplayName(
         user.username,
       );
       await getIt.get<FirebaseAuth>().currentUser!.reload();
+      final User refreshedUser = getIt.get<FirebaseAuth>().currentUser!;
       _apiService.put(
         endPoint: '/Users/${getIt.get<FirebaseAuth>().currentUser!.uid}',
         data: user.toJson(),
       );
-      return right(unit);
+      return right(refreshedUser);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));

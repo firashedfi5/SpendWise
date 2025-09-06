@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:spendwise/features/auth/data/models/user_model.dart';
@@ -17,7 +18,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     final result = await _settingsRepo.updateProfile(user: user);
     result.fold(
       (failure) => emit(UpdateProfileFailure(errMessage: failure.message)),
-      (success) => emit(UpdateProfileSuccess()),
+      (user) => emit(UpdateProfileSuccess(user: user)),
     );
   }
 
