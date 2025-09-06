@@ -5,11 +5,17 @@ import 'package:spendwise/features/home/presentation/manager/delete_transaction/
 import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_loading.dart';
+import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class TransactionListViewBlocBuilder extends StatelessWidget {
-  const TransactionListViewBlocBuilder({super.key, required this.isHome});
+  const TransactionListViewBlocBuilder({
+    super.key,
+    required this.isHome,
+    required this.isLastAdded,
+  });
 
   final bool isHome;
+  final bool isLastAdded;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +66,22 @@ class TransactionListViewBlocBuilder extends StatelessWidget {
                 ),
               );
             }
+
+            //* Sorting
+            List<TransactionModel> sortedTransactions;
+            if (isLastAdded == true) {
+              sortedTransactions = [...transactions]
+                ..sort((a, b) {
+                  final aDate = a.createdAt ?? DateTime(0);
+                  final bDate = b.createdAt ?? DateTime(0);
+                  return bDate.compareTo(aDate); //* Descending
+                });
+            } else {
+              sortedTransactions = transactions;
+            }
+
             return TransactionsListView(
-              transactions: transactions,
+              transactions: sortedTransactions,
               isHome: isHome,
             );
           } else if (state is FetchTransactionsFailure) {

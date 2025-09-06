@@ -70,7 +70,7 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                 CustomTextFormField(
                   textController: titleController,
                   label: 'Expense Title',
-                  hintText: 'Travel trip to canada',
+                  hintText: 'Travel trip',
                 ),
                 const SizedBox(height: 30),
                 AmountTextFormField(amountController: amountController),

@@ -55,7 +55,7 @@ class _AddTransactionScreenBodyState extends State<AddTransactionScreenBody>
             child: Text('Last Added', style: Styles.textStyle18),
           ),
         ),
-        TransactionListViewBlocBuilder(isHome: false),
+        TransactionListViewBlocBuilder(isHome: false, isLastAdded: true),
       ],
     );
   }
