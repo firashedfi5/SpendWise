@@ -103,6 +103,7 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: DateTime.now(),
                             ),
                           );
                     } else {
@@ -123,6 +124,9 @@ class _AddExpenseScreenBodyState extends State<AddExpenseScreenBody> {
                               date: context
                                   .read<AddUpdateTransactionCubit>()
                                   .date,
+                              createdAt: context
+                                  .read<AddUpdateTransactionCubit>()
+                                  .createdAt,
                             ),
                           );
                     }

@@ -14,12 +14,14 @@ class AddUpdateTransactionCubit extends Cubit<AddUpdateTransactionState> {
   int? id;
   String? userId;
   DateTime date = DateTime.now();
+  DateTime createdAt = DateTime.now();
   String? category;
 
   void initializeWithTask(TransactionModel transaction) {
     id = transaction.id!;
     userId = transaction.userId!;
     date = transaction.date!;
+    createdAt = transaction.createdAt!;
     category = transaction.category!;
 
     emit(UpdateTransactionInitial(transaction: transaction));
