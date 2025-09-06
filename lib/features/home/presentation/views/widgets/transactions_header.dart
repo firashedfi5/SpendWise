@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spendwise/core/constants.dart';
+import 'package:spendwise/core/utils/app_router.dart';
 import 'package:spendwise/core/utils/styles.dart';
 
 class TransactionsHeader extends StatelessWidget {
@@ -17,7 +19,10 @@ class TransactionsHeader extends StatelessWidget {
               'Transactions',
               style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w600),
             ),
-            TextButton(onPressed: () {}, child: const Text('View All')),
+            TextButton(
+              onPressed: () => context.push(AppRouter.kAllTransactionsScreen),
+              child: const Text('View All'),
+            ),
           ],
         ),
       ),

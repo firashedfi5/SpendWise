@@ -13,11 +13,13 @@ import 'package:spendwise/features/transactions/data/models/transaction_model.da
 import 'package:spendwise/features/transactions/presentation/views/add_expense_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_income_screen.dart';
 import 'package:spendwise/features/transactions/presentation/views/add_transaction_screen.dart';
+import 'package:spendwise/features/transactions/presentation/views/all_transactions_screen.dart';
 
 abstract class AppRouter {
   static const String kSignupScreen = '/signupScreen';
   static const String kForgotPasswordScreen = '/forgotPasswordScreen';
   static const String kMainScreen = '/mainScreen';
+  static const String kAllTransactionsScreen = '/allTransactionsScreen';
   static const String kAddTransactionScreen = '/newTransactionScreen';
   static const String kAddIncomeScreen = '/addIncomeScreen';
   static const String kAddExpenseScreen = '/addExpenseScreen';
@@ -40,6 +42,10 @@ abstract class AppRouter {
       GoRoute(
         path: kMainScreen,
         builder: (context, state) => const MainScreen(),
+      ),
+      GoRoute(
+        path: kAllTransactionsScreen,
+        builder: (context, state) => const AllTransactionsScreen(),
       ),
       GoRoute(
         path: kAddTransactionScreen,
