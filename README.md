@@ -104,23 +104,32 @@ lib/
 
 ### Main Dependencies
 
-- `flutter/material.dart` - Material Design components and widgets
-- `dartz` - Functional programming utilities (Either, Option types)
-- `dio` - Powerful HTTP client for API requests and interceptors
-- `flutter_bloc` - State management using BLoC pattern
-- `go_router` - Declarative routing and navigation
-- `google_nav_bar` - Animated bottom navigation bar with Google style
-- `shared_preferences` - Local key-value storage for app preferences
-- `skeletonizer` - Loading skeleton animations for better UX
-- `table_calendar` - Customizable calendar widget with events support
-- `flutter_native_splash` - Create native splash screens for iOS and Android
+- `flutter_bloc` - State management with BLoC pattern
+- `dio` - HTTP client for API requests
+- `firebase_core` - Firebase initialization
+- `firebase_auth` - Firebase authentication
+- `firebase_storage` - Firebase storage for file uploads
+- `go_router` - Navigation and routing
+- `cached_network_image` - Efficient image loading and caching
+- `fl_chart` - Charting library for data visualization
+- `table_calendar` - Interactive calendar widget
+- `image_picker` - Image selection from gallery or camera
+- `hive` - Local storage solution
+- `hive_flutter` - Hive extension for Flutter
+- `get_it` - Dependency injection
+- `intl` - Internationalization and formatting
+- `shared_preferences` - Persistent key-value storage
 
 ### Dev Dependencies
 
-- `flutter_test` - Built-in testing framework for unit and widget tests
-- `flutter_lints` - Official Dart linting rules for code quality
-- `flutter_launcher_icons` - Generate app launcher icons for all platforms
-- `mockito` - Mock objects for unit testing and dependency isolation
+- `flutter_test` - Flutter testing framework
+- `build_runner` - Code generation tool
+- `hive_generator` - Code generation for Hive
+- `flutter_lints` - Linting for code quality
+
+For the complete list of dependencies, see the [pubspec.yaml](pubspec.yaml) file.
+
+Run `flutter pub get` to install these dependencies.
 
 ## 🧪 Testing
 
@@ -163,7 +172,6 @@ This app connects to a Node.js backend API. You can find the backend repository 
 
 - **Repository**: [SpendWise Backend Repo](https://github.com/firashedfi5/SpendWise-Backend)
 - **Technology**: ASP.NET Core Web API
-[comment]: <> (- **Documentation**: API documentation available in the backend repo)
 
 ## 🤝 Contributing
 
