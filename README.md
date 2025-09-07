@@ -2,7 +2,7 @@
 <h1>SpendWise</h1>
 </div>
 <div align="center">
-   <img src="assets/logos/SpendWise_logo.png" alt="Logo" width="300"/>
+   <img src="assets/logos/SpendWise_logo.png" alt="Logo" width="150"/>
 </div>
 
 ## 📱 Screenshots
