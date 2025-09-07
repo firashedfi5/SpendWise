@@ -2,7 +2,7 @@
 <h1>SpendWise</h1>
 </div>
 <div align="center">
-   <img src="assets/logo/TaskZen_logo.png" alt="Home" width="300"/>
+   <img src="assets/logos/SpendWise_logo.png" alt="Logo" width="300"/>
 </div>
 
 ## 📱 Screenshots
