@@ -40,7 +40,7 @@ class Chart extends StatelessWidget {
                         return BarTooltipItem(
                           '${rod.toY}',
                           const TextStyle(
-                            color: Colors.white, // Text color
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         );
@@ -57,7 +57,7 @@ class Chart extends StatelessWidget {
                       sideTitles: SideTitles(showTitles: false),
                     ),
                   ),
-                  maxY: 8000,
+                  // maxY: 8000,
                   barGroups: stats.asMap().entries.map((entry) {
                     final index = entry.key;
                     final data = entry.value;
