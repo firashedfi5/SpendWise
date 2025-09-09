@@ -9,16 +9,11 @@ sealed class FilteringState extends Equatable {
 
 final class FilteringInitial extends FilteringState {}
 
-final class FilteringLoading extends FilteringState {}
-
 final class FilteringSuccess extends FilteringState {
   final List<TransactionModel> filteredTransactions;
 
   const FilteringSuccess({required this.filteredTransactions});
-}
 
-final class FilteringFailure extends FilteringState {
-  final String errMessage;
-
-  const FilteringFailure({required this.errMessage});
+  @override
+  List<Object> get props => [filteredTransactions];
 }

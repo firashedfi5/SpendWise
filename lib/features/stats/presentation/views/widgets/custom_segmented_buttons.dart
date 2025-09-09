@@ -20,7 +20,7 @@ class _CustomSegmentedButtonState extends State<CustomSegmentedButton> {
     setState(() {
       _selected = newSelection;
     });
-    context.read<FilteringCubit>().type = newSelection.first;
+    context.read<FilteringCubit>().updateFilterType(newSelection.first);
 
     context.read<FilteringCubit>().filterTransactions(
       type: context.read<FilteringCubit>().type,

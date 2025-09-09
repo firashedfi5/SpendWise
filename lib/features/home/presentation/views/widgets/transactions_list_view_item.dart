@@ -29,7 +29,14 @@ class TransactionsListViewItem extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(transaction.title ?? '', style: Styles.textStyle18),
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    transaction.title ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyle18,
+                  ),
+                ),
                 const SizedBox(height: 4),
                 Text(
                   formatDate(transaction.date!),

@@ -17,7 +17,7 @@ BarChartGroupData customBarChart({
         width: 10,
         backDrawRodData: BackgroundBarChartRodData(
           color: Colors.grey.withValues(alpha: 0.4),
-          toY: 8000,
+          toY: 10000,
           show: true,
         ),
       ),
@@ -27,7 +27,7 @@ BarChartGroupData customBarChart({
         width: 10,
         backDrawRodData: BackgroundBarChartRodData(
           color: Colors.grey.withValues(alpha: 0.4),
-          toY: 8000,
+          toY: 10000,
           show: true,
         ),
       ),
