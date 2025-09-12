@@ -19,7 +19,7 @@ class AddTransactionButtons extends StatelessWidget {
             GestureDetector(
               onTap: () => context.push(AppRouter.kAddIncomeScreen),
               child: Container(
-                width: MediaQuery.of(context).size.width * .4,
+                width: MediaQuery.of(context).size.width * .425,
                 height: 85,
                 decoration: BoxDecoration(
                   color: kPrimaryColor.withValues(alpha: 0.13),
@@ -44,7 +44,7 @@ class AddTransactionButtons extends StatelessWidget {
             GestureDetector(
               onTap: () => context.push(AppRouter.kAddExpenseScreen),
               child: Container(
-                width: MediaQuery.of(context).size.width * .4,
+                width: MediaQuery.of(context).size.width * .425,
                 height: 85,
                 decoration: BoxDecoration(
                   color: kSecondaryColor.withValues(alpha: 0.13),

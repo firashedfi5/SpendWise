@@ -19,7 +19,7 @@ class StatsHeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * .4,
+      width: MediaQuery.of(context).size.width * .425,
       height: 85,
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.13),

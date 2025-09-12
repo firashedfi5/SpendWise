@@ -48,15 +48,7 @@ class AllTransactionsScreenBody extends StatelessWidget {
           if (state is FetchTransactionsSuccess) {
             final transactions = state.transactions;
             if (transactions.isEmpty) {
-              return const SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    SizedBox(height: 50),
-                    Text('No Transaction added yet!'),
-                    SizedBox(height: 50),
-                  ],
-                ),
-              );
+              return const Center(child: Text('No Transaction added yet!'));
             }
             return AllTransactionListView(transactions: transactions);
           } else if (state is FetchTransactionsFailure) {

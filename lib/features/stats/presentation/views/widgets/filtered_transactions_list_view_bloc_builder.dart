@@ -2,29 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/core/utils/functions/custom_snackbar.dart';
 import 'package:spendwise/features/home/presentation/manager/delete_transaction/delete_transaction_cubit.dart';
+import 'package:spendwise/features/home/presentation/manager/fetch_transactions/fetch_transactions_cubit.dart';
 import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view.dart';
-import 'package:spendwise/features/home/presentation/views/widgets/transactions_list_view_loading.dart';
 import 'package:spendwise/features/stats/presentation/manager/filtering_cubit/filtering_cubit.dart';
+import 'package:spendwise/features/transactions/data/models/transaction_model.dart';
 
 class FilteredTransactionsListViewBlocBuilder extends StatelessWidget {
   const FilteredTransactionsListViewBlocBuilder({super.key});
 
-  // TODO: improve the filtering
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<FilteringCubit, FilteringState>(
-          listener: (context, state) {
-            if (state is FilteringFailure) {
-              customSnackBar(
-                context: context,
-                message: state.errMessage,
-                success: false,
-              );
-            }
-          },
-        ),
         BlocListener<DeleteTransactionCubit, DeleteTransactionState>(
           listener: (context, state) {
             if (state is DeleteTransactionSuccess) {
@@ -46,11 +35,12 @@ class FilteredTransactionsListViewBlocBuilder extends StatelessWidget {
           },
         ),
       ],
-      child: BlocBuilder<FilteringCubit, FilteringState>(
+      child: BlocBuilder<FetchTransactionsCubit, FetchTransactionsState>(
         builder: (context, state) {
-          if (state is FilteringSuccess) {
-            final transactions = state.filteredTransactions;
-            if (transactions.isEmpty) {
+          if (state is FetchTransactionsSuccess) {
+            final allTransactions = state.transactions;
+
+            if (allTransactions.isEmpty) {
               return const SliverToBoxAdapter(
                 child: Column(
                   children: [
@@ -61,22 +51,30 @@ class FilteredTransactionsListViewBlocBuilder extends StatelessWidget {
                 ),
               );
             }
-            return TransactionsListView(
-              transactions: transactions,
-              isHome: false,
+
+            context.read<FilteringCubit>().setAllTransactions(allTransactions);
+
+            return BlocBuilder<FilteringCubit, FilteringState>(
+              builder: (context, state) {
+                List<TransactionModel> filteredTransactions = [];
+
+                if (state is FilteringInitial) {
+                  filteredTransactions = allTransactions;
+                } else if (state is FilteringSuccess) {
+                  filteredTransactions = state.filteredTransactions;
+                }
+
+                return TransactionsListView(
+                  transactions: filteredTransactions
+                      .where(
+                        (transaction) =>
+                            transaction.date!.month == DateTime.now().month,
+                      )
+                      .toList(),
+                  isHome: false,
+                );
+              },
             );
-          } else if (state is FilteringFailure) {
-            return const SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  SizedBox(height: 50),
-                  Icon(Icons.error_outline, color: Colors.red),
-                  SizedBox(height: 50),
-                ],
-              ),
-            );
-          } else if (state is FilteringLoading) {
-            return const TransactionsListViewLoading();
           }
           return const SliverToBoxAdapter(child: SizedBox());
         },
