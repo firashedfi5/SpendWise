@@ -1,8 +1,20 @@
 <div align="center">
-<h1>SpendWise</h1>
-</div>
-<div align="center">
-   <img src="assets/logos/SpendWise_logo.png" alt="Logo" width="150"/>
+
+<br>
+
+<img src="assets/logos/spendwise_readme.png" width="140" style="border-radius: 16px;"/>
+
+# SpendWise
+
+<br>
+
+![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=flat-square&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=flat-square&logo=dart&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey?style=flat-square)
+
+<br>
+
 </div>
 
 ## 📱 Screenshots
